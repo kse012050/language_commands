@@ -35,6 +35,7 @@ var Component = Vue.extend({
 ``data`` 속성과 함께 화살표 함수를 사용하는 경우 ``this``는 구성 요소의 인스턴스가 아니지만 함수의 첫 번째 인수로 인스턴스에 계속 엑세스 할 수 있습니다.
 ~~~js
 data: vm =>({ a: vm.myProp })
+~~~
 - 참조 : [심층 반응성](https://vuejs.org/v2/guide/reactivity.html)  
   
 [내용 출처 Vue.js 공식 사이트 data](https://vuejs.org/v2/api/#data)
