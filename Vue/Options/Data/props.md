@@ -57,5 +57,25 @@ var vm = new Comp({
   }
 })
 ~~~
+
+> 상위 컴포넌트에서 하위 컴포넌트로 데이터 전송?!!!  
+## 상위 컴포넌트
+~~~html
+<TodoList v-bind:propsdata="todoItems"></TodoList>
+~~~
+~~~js
+data : function(){
+    return{
+        todoItems : []
+    }
+},
+...
+~~~
+## 하위 컴포넌트
+~~~js
+props:['propsdata'],
+~~~
+> vue-todo 할 일 관리 앱 참조  
+
 [내용출처 Vue.js 공식사이트 props](https://kr.vuejs.org/v2/api/index.html#props)  
 [내용출처 Vue.js 공식사이트 propsdata](https://kr.vuejs.org/v2/api/index.html#propsData)
