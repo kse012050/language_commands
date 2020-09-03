@@ -16,6 +16,8 @@
     이 모드에서는 ``class`` 와 ``style`` 은 Array나 Objects를 지원하지 않습니다.
 
 - 예제
+> v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"
+
 ~~~html
 <!-- 속성을 바인딩 합니다. -->
 <img v-bind:src="imageSrc">
@@ -70,3 +72,4 @@
     - [컴포넌트 - ``.sync`` 수식어](https://kr.vuejs.org/v2/guide/components.html#sync-%EC%88%98%EC%8B%9D%EC%96%B4)
 
 [내용출처 Vue.js 공식사이트 v-bind](https://kr.vuejs.org/v2/api/index.html#v-bind)
+
