@@ -162,3 +162,55 @@ var strReverse = str.split(/(?:)/u).reverse().join('');
 팰린드롬이 뭘까?
 
 [내용출처 MDN 공식사이트](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+
+## 성은이가 정리하는 예제
+### 글자 타이핑 효과
+글자가 써지는 듯한 효과
+~~~js
+    // 메인 텍스트 타이핑
+    var typingBool = false;
+    var typingIdx = 0;
+    var typingTxt = $(".typing-txt").text(); // 타이핑될 텍스트를 가져온다 
+    typingTxt = typingTxt.split(""); // 한글자씩 자른다. 
+    if (typingBool == false) { // 타이핑이 진행되지 않았다면 
+        typingBool = true;
+
+        var tyInt = setInterval(typing, 100); // 반복동작 
+    }
+
+    function typing() {
+        if (typingIdx < typingTxt.length) { // 타이핑될 텍스트 길이만큼 반복 
+            $(".typing").append(typingTxt[typingIdx]); // 한글자씩 이어준다. 
+            typingIdx++;
+        } else {
+            clearInterval(tyInt); //끝나면 반복종료 
+        }
+    }
+~~~
+
+### 금액 , 액수에  ',' 찍기
+
+~~~js
+var total; // 금액
+var totalArray = String(total).split("");
+var result = '';
+var RegExp; //정규표현식
+
+
+for(var i = totalArray.length - 1; i >= 0; i--){
+    if(((totalArray.length - 1) - i)%3 == 0 && i != totalArray.length - 1){
+        result = ',' + result;
+    }
+    result = totalArray[i] + result;
+}
+
+console.log(result);
+
+RegExp = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+// 정규표현식
+// 문자열을 처리하는 방법 중의 하나로 특정한 조건의 문자를 '검색'하거나 '치환'하는 과정을 매우 간편하게 처리할 수 있도록 하는 수단이다
+
+// console.log(test2);
+
+$totalPrice.text(test1+ ' 원');
+~~~
