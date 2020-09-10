@@ -85,3 +85,53 @@
     - [컴포넌트 - 사용자 정의 이벤트](https://kr.vuejs.org/v2/guide/components.html#search-query-nav)
 
 [내용출처 Vue.js 공식사이트 v-on](https://kr.vuejs.org/v2/api/index.html#v-on)
+
+
+## 사용 예제
+### 하나의 페이지에서 사용할 때
+~~~html
+<태그명 v-on:click="toggleComplete()"></태그명>
+<!-- v-on:event="함수명()" -->
+~~~
+~~~js
+export default {
+    methods:{
+        toggleComplete(){
+            // 로직...
+      }
+    }
+}
+~~~
+
+### 상위 컴포넌트로 이벤트 올릴 때
+> A : 상위 컴포넌트 , B : 하위 컴포넌트
+#### B 컴포넌트
+~~~html
+<태그명 v-on:event="함수명(매개변수1, 매개변수2)"></태그명>
+<태그명 v-on:event="하위 컴퍼넌트에서 발생시킨 이벤트 이름(매개변수1, 매개변수2)"></태그명>
+~~~
+~~~js
+export default {
+    methods:{
+        함수명:function(매개변수1, 매개변수2){
+            this.$emit('상위컴포넌트의 함수명', 넘길 인자1, 넘길 인자2, ...)
+      },
+        하위 컴퍼넌트에서 발생시킨 이벤트 이름(매개변수1, 매개변수2){
+          this.$emit('상위컴포넌트의 함수명', 넘길 인자1, 넘길 인자2, ...)
+      }
+    }
+}
+~~~
+#### A 컴포넌트
+~~~html
+<태그명 v-on:하위 컴퍼넌트에서 발생시킨 이벤트 이름:"현재 컴포넌트의 메서드 명"></태그명>
+~~~
+~~~js
+export default {
+    methods:{
+        컴포넌트의 메서드 명(매개변수1, 매개변수2){
+            // ..로직
+      }
+    }
+}
+~~~
