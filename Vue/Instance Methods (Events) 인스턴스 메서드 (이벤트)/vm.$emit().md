@@ -67,13 +67,19 @@ new Vue({
 })
 ~~~
 
-> 하위 컴포넌트에서 상위 컴포넌트로 이벤트 전달!  
+
+[내용 출처 Vue.js 공식사이트 $emit()](https://kr.vuejs.org/v2/api/index.html#vm-emit)
+
+## 사용 예제
+### 하위 컴포넌트에서 상위 컴포넌트로 이벤트 전달!  
+~~~html
+<태그명 v-on:event="하위 컴퍼넌트에서 발생시킨 이벤트 이름(매개변수1, 매개변수2)"></태그명>
+~~~
 ~~~js
 methods:{
     addItem:function(){
-        this.$emit('addTodoItem',this.newTodoItem);
+        this.$emit('하위 컴퍼넌트에서 발생시킨 이벤트 이름',넘길 인자1,넘길 인자2, ...);
     }
 }
 ~~~
-
-[내용 출처 Vue.js 공식사이트 $emit()](https://kr.vuejs.org/v2/api/index.html#vm-emit)
+> 상위 컴포넌트 정보까지 보려면 인스턴스 메서드 (이벤트) / v-on 참조
