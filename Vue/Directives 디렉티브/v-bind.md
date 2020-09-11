@@ -16,7 +16,6 @@
     이 모드에서는 ``class`` 와 ``style`` 은 Array나 Objects를 지원하지 않습니다.
 
 - 예제
-> v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"
 
 ~~~html
 <!-- 속성을 바인딩 합니다. -->
@@ -72,4 +71,49 @@
     - [컴포넌트 - ``.sync`` 수식어](https://kr.vuejs.org/v2/guide/components.html#sync-%EC%88%98%EC%8B%9D%EC%96%B4)
 
 [내용출처 Vue.js 공식사이트 v-bind](https://kr.vuejs.org/v2/api/index.html#v-bind)
+
+
+## 사용 예제
+### v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"
+> A : 상위 컴포넌트 , B : 하위 컴포넌트
+
+#### A 컴포넌트
+~~~html
+<TodoList v-bind:propsdata="todoItems"></todoList>
+<하위컴포넌트  v-bind:내려보낼 프롭스 속성 이름="현재 위치의 컴포넌트 데이터 속성">
+~~~
+~~~js
+export default {
+  data : function(){
+    return{
+      todoItems : []    // 작성한 함수(로직)에 의해 채워질 배열
+    // todoItems -> 현재 위치의 컴포넌트 데이터 속성
+    }
+  },
+  ....  // 로직
+}
+~~~
+
+#### B 컴포넌트
+~~~html
+<template>
+    <ul>
+        <li v-for="(todoItem,index) in propsdata" v-bind:key="todoItem.item">
+        <!-- 음.. 아직 잘 모르겠따... v-for쓸 때는 v-bind:key="값" 을 넣어줘야합니다. -->
+        </li>
+    </ul>
+</template>
+~~~
+~~~js
+export default {
+    props:['propsdata'],
+    // props:[(상위 컴포넌트에서) 내려보낼 프롬스 속성 이름]
+}
+~~~
+
+### v-bind:class , boolean 값에 따라 class 넣고 빼기
+~~~html
+<span v-bind:class="{textCompleted: todoItem.complated}"></span>
+<!-- v-bind:class="{클래스명: boolean 값이 담겨 있는 변수} -->
+~~~
 
