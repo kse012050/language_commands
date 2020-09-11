@@ -18,3 +18,19 @@
 
 
 [내용출처 Vue.js 공식사이트 v-model](https://kr.vuejs.org/v2/api/index.html#v-model)
+
+## 사용 예제
+### ``<input>`` 의 값 변수에 받기
+~~~html
+<input type="text" v-model="newTodoItem" v-on:keyup.enter="addItem">
+<!-- v-model: (input text) 의 값을 받을 변수명 -->
+~~~
+~~~js
+export default {
+    data:function(){
+        return{
+            newTodoItem:''
+        }
+    },
+}
+~~~
