@@ -57,10 +57,55 @@ Options:
 ## Vue webpack 설치방법
   1. CLI
   2. __프로젝트를 생성할 위치__ 로 이동
-  3. ``vue init webpack-simple`` 프로젝트명 입력
+  3. ``vue init webpack-simple 프로젝트명`` 입력
   4. 생성한 프로젝트 파일로 이동 , __cd 프로젝트 파일명__
   5. ``npm i`` -> npm 설치 
   6. ``npm run dev``  -> 실행
+
+### Vue 프로젝트에 Vuex 설치하기
+  1. CLI
+  2. __프로젝트를 생성할 위치__ 로 이동
+  3. ``npm install vuex --save`` 입력 ---> [Vuex 공식사이트 설치](https://vuex.vuejs.org/kr/installation.html)
+  4. __package.json__ 파일에 "dependencies" :{vuex} 설치 확인
+  5. 일반적으로?통상적으로? Vuex 를 store라고 네이밍 합니다.
+  6. src 폴더 안에 __store__ 폴더만 들고, 그 안에 __store.js__ 파일 생성
+
+  > A : store.js (Vuex 생성) , B : main.js 
+#### A  (store.js)
+~~~js
+import Vue from 'vue'
+import Vuex from 'vuex'
+// import - > 수입
+
+Vue.use(Vuex)
+// use 는 Vue의 플러그인
+// 설정을 해줘야 this.$store 로 접근가능
+
+export const store = new Vuex.Store({
+// export -> 수출
+});
+~~~
+
+#### B (main.js)
+~~~js
+import Vue from 'vue'
+import App from './App.vue'
+
+
+import { store } from './store/store.js'  /* 새로 추가 */
+// 생성한 store.js 를 연결
+
+new Vue({
+  el: '#app',
+  store,  /* 새로 추가 */
+  // 연결한 store를 등록 ES6 문법
+  // ES5 ->  store : store  -> 같은 명칭이면 축약해서 사용 가능
+  render: h => h(App)
+})
+
+~~~
+  
+
 
 
 
