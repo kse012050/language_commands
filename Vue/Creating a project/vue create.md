@@ -5,10 +5,10 @@ vue create 프로젝트이름
 ~~~
 
 사전 설정을 선택하라는 메시지가 표시됩니다. 기본 Babel + ESLint 설정과 함께 제공되는 기본 사전 설정을 선택하거나 "수동으로 기능 선택"을 선택하여 필요한 기능을 선택할 수 있습니다.  
-![cli-new-project](cli-new-project.png)
+![cli-new-project](images/cli-new-project.png)
 
 기본 설정은 새 프로젝트를 신속하게 프로토 타이핑하는 데 유용하며 수동 설정은 보다 생산 지향적인 프로젝트에 필요한 더 많은 옵션을 제공합니다.  
-![cli-select-features](cli-select-features.png)
+![cli-select-features](images/cli-select-features.png)
 
  기능을 수동으로 선택하도록 선택한 경우 프롬프트 끝에 선택 항목을 사전 설정으로 저장하여 나중에 다시 사용할 수 있는 옵션도 제공됩니다. 다음 섹션에서 사전 설정 및 플로그인에 대해 설명합니다. 
  > ~ / .vuere  
