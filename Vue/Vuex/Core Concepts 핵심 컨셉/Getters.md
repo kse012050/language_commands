@@ -77,3 +77,25 @@ store.getters.getTodoById(2) // -> { id: 2, text: '...', done: false }
 메서드를 통해 접근하는 getter는 호출 할 때마다 실행되며 결과가 캐시되지 않는다는 것을 유의해야 합니다.
 
 [출처내용 Vuex 공식사이트 Getters](https://vuex.vuejs.org/kr/guide/getters.html)
+
+## getters란?
+
+- state 값을 접근하는 속성이자 ``computed()`` 처럼 미리 연산된 값을 접근하는 속성
+~~~js
+// store.js
+state: {
+    num: 10
+},
+getters: {
+    getNumber(state){
+        return state.num;
+    },
+    doubleNumber(state){
+        return state.num * 2;
+    }
+}
+~~~
+~~~html
+<p>{{ this.$store.getters.getNumber }}</p>
+<p>{{ this.$store.getters.doubleNumber }}</p>
+~~~
