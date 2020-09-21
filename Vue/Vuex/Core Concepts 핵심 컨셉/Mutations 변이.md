@@ -145,3 +145,43 @@ store.commit('increment')
 비동기 작업을 처리하기 위한 [액션](https://vuex.vuejs.org/kr/guide/actions.html) 를 소개합니다.
 
 [내용 출처 Vuex 공식사이즈 Mutations](https://vuex.vuejs.org/kr/guide/mutations.html)
+
+
+## mutations란 ?
+- state의 값을 변경할 수 있는 __유일한 방법__ 이자 메서드
+- 뮤테이션은 ``commit()`` 으로 동작시킨다.
+~~~js
+// store.js
+state: { num: 10 },
+mutations: {
+    printNumbers(state){
+        return state.num
+    },
+    sumNumbers(state, anotherNum){
+        return state.num + anotherNum;
+    }
+}
+
+// App.vue
+this.$store.commit('printNumbers');
+this.$store.commit('sumNumbers',20);
+~~~
+
+### mutations의 commit() 형식
+- state를 변경하기 위해 mutations를 동작시킬 때 인자(payload)를 전달할 수 있음
+~~~js
+// store.js
+state: { storeNum: 10 },
+mutations: {
+    modifyState(state, payload){
+        console.log(payload.str);
+        return state.storeNum += payload.num;
+    }
+}
+
+// App.vue
+this.$store.commit('modifyState',{
+    str : 'passed from payload',
+    num : 20
+});
+~~~
