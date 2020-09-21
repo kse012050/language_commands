@@ -51,3 +51,25 @@ const Counter = {
 ~~~
 
 [내용 출처 Vuex 공식사이트](https://vuex.vuejs.org/kr/guide/state.html)
+
+
+## state란?
+- 여러 컴포넌트 간에 공유할 데이터 - __상태__
+~~~js
+// Vue
+data: {
+    message: 'Hello Vue.js!'
+}
+
+// Vuex
+state: {
+    message: 'Hello Vue.js!'
+}
+~~~
+~~~html
+<!-- Vue -->
+<p>{{ message }}</p>
+
+<!-- Vuex -->
+<p>{{ this.$store.state.message }}</p>
+~~~
