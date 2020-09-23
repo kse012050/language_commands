@@ -162,3 +162,71 @@ actions: {
 > ``store.dispatch``가 다른 모듈에서 여러 액션 핸들러를 트리거하는 것이 가능합니다. 이 경우 반환 된 값은 모든 트리거 된 처리기가 완료 되었을 때 처리되는 Promise입니다.
 
 [내용출처 Vuex 공식사이트 actions](https://vuex.vuejs.org/kr/guide/actions.html)
+
+## actions란?
+- 비동기 처리 로직을 선언하는 메서드. 비동기 로직을 담당하는 mutations
+- 데이터 요청, [Promise], ES6 async과 같은 [비동기 처리]()는 모두 actions에 선언
+~~~js
+// store.js
+state: {
+    num: 10
+},
+mutations: {
+    doubleNumber(state) {
+        state.num * 2
+    }
+},
+actions: {
+    delayDoubleNumber(context) {    // context로 store의 메서드와 속성 접근
+        context.commit('doubleNumber');
+    }
+}
+
+// App.vue
+this.$store.dispatch('delayDoubleNumber');
+~~~
+> 비동기 코드 X, 전체적인 흐름을 보여주는 코드
+
+### actions 비동기 코드 예제 1
+~~~js
+// store.js
+mutations: {
+    addCounter(state){
+        state.counter++
+    },
+},
+actions: {
+    delayeAddCounter(context){
+        setTimeout(() => context.commit('addCounter'),2000);
+    }
+}
+
+// App.vue
+methods: {
+    incrementCounter() {
+        this.$store.dispatch('delayedAddCounter');
+    }
+}
+~~~
+
+### actions 비동기 코드 예제 2
+~~~js
+// store.js
+mutations: {
+    setDate(state, fetchedData){
+        state.product = fetchedData;
+    }
+},
+actions: {
+    fetchProductData(context) {
+        return axios.get('https://domain.com/products/1').then(respons => context.commit('setData',response));
+    }
+}
+
+// App.vue
+methods: {
+    getProduct(){
+        this.$store.dispatch('fetchProductData');
+    }
+}
+~~~
