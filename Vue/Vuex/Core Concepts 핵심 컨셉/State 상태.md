@@ -124,3 +124,26 @@ computed: {
 Vuex를 사용한다고해서 Vuex에 __모든__ 상태를 넣어야하는 것은 아닙니다. Vuex에 더 많은 상태를 넣으면 상태 변이가 더 명확하고 디버그 가능하지만, 때로는 코드를 보다 장황하고 간접적으로 만들 수 있습니다. 상태 조각이 단일 컴포넌트에 엄격하게 속한 경우 로컬 상태로 남겨 둘 수 있습니다. 기회비용을 판단하고 앱의 개발 요구에 맞는 결정을 내려야 합니다.
 
 [내용출처 Vuex 공식사이트 State 하단](https://vuex.vuejs.org/kr/guide/state.html)
+
+## ``mapState`` 헬퍼 사용 예제
+
+###  mapState
+- Vuex에 선언한 state 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+~~~js
+// App.vue
+import { mapState } from 'vuex'
+
+computed() {
+  ...mapState(['num'])
+  // num() { return this.$store.state.num; }
+}
+
+// store.js
+state: {
+  num: 10
+}
+~~~
+~~~html
+<!-- <p>{{ this.$store.state.num }}</p> -->
+<p>{{ this.num }}</p>
+~~~
