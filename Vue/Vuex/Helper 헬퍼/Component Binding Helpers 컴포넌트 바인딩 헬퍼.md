@@ -28,3 +28,26 @@ getter의 평가된 값을 반환하는 컴포넌트 계산 옵션을 만듭니�
 namespace가 적용된 컴포넌트 바인딩 helper를 만듭니다. 주이전 namespace가 적용된 ``mapState``,``mapGetters``,``mapActions``,``mapMutations`` 들을 가지고 있는 오브젝트를 반환합니다.[상세](https://vuex.vuejs.org/kr/guide/modules.html#%ED%97%AC%ED%8D%BC%EC%97%90%EC%84%9C-%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EB%B0%94%EC%9D%B8%EB%94%A9)  
   
 [출처내용 Vuex 공식사이트 컴포넌트 바인딩 헬퍼](https://vuex.vuejs.org/kr/api/#unregistermodule)
+
+# 각 속성들을 더 쉽게 사용하는 방법 - Helper
+Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
+- state -> mapState
+- getters -> mapGetters
+- mutations -> mapMutations
+- actions -> mapActions
+
+## 헬퍼의 사용법
+- 헬퍼를 사용하고자 하는 vue 파일에서 아래와 같이 해당 헬퍼를 로딩
+~~~js
+// App.vue
+import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
+
+export default {
+    computed() {...mapState(['num'])}, ...mapGetters(['countedN'])},
+    methods: { ...mapMutations(['clickBtn']), ...mapActions(['asyncClickBtn'])}
+}
+~~~
+> ...는 오타인가요> __ES6__의 object Spread Operator입니다.
