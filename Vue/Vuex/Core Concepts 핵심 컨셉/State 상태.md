@@ -52,6 +52,32 @@ const Counter = {
 
 [내용 출처 Vuex 공식사이트](https://vuex.vuejs.org/kr/guide/state.html)
 
+## State 사용 예제
+
+### vue-todo 할 일 관리 앱
+> A : store.js , B : 하위 컴포넌트  
+  
+### A : store.js
+~~~js
+export const store = new Vuex.Store({
+    state:{
+        변수명: 변수값,
+    },
+    mutations:{
+        함수(state){
+          state.변수명
+          // state에 변수들이 배열로? 담긴다. 기존 this?!!
+        },
+    }
+}
+~~~
+
+### B : 하위 컴포넌트
+~~~js
+this.$store.state.변수명  // store에 있는 변수로 접근
+~~~
+
+<hr>
 
 ## state란?
 - 여러 컴포넌트 간에 공유할 데이터 - __상태__
