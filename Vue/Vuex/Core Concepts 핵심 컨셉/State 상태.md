@@ -73,3 +73,54 @@ state: {
 <!-- Vuex -->
 <p>{{ this.$store.state.message }}</p>
 ~~~
+
+
+## ``mapState`` 헬퍼
+컴포넌트가 여러 저장소 상태 속서잉나 getter를 사용해야하는 경우 계산된 속성을 모두 선언하면 반복적이고 장황해집니다. 이를 처리하기 위해 우리는 계산된 getter 함수를 생성하는 ``mapState`` 헬퍼를 사용하여 키 입력을 줄일 수 있습니다.
+
+~~~js
+// 독립 실행 형 빌드에서 헬퍼가 Vuex.mapState로 노출됩니다.
+import { mapState } from 'vuex'
+
+export default {
+  // ...
+  computed: mapState({
+    // 화살표 함수는 코드를 매우 간결하게 만들어 줍니다!
+    count: state => state.count,
+
+    // 문자열 값 'count'를 전달하는 것은 `state => state.count`와 같습니다.
+    countAlias: 'count',
+
+    // `this`를 사용하여 로컬 상태에 액세스하려면 일반적인 함수를 사용해야합니다
+    countPlusLocalState (state) {
+      return state.count + this.localCount
+    }
+  })
+}
+~~~  
+
+또한 매핑 된 계산된 속성의 이름이 상태 하위 트리 이름과 같을 때 문자열 배열을 ``mapState``에 전달할 수 있습니다.  
+
+~~~js
+computed: mapState([
+  // this.count를 store.state.count에 매핑 합니다.
+  'count'
+])
+~~~
+
+## 객체 전개 연산자 (Object Spread Operator)
+``mapState`` 는 객체를 반환합니다. 다른 로컬 영역의 계산된 속성과 함께 사용하려면 어떻게 해야 하나요? 일반적으로, 최종 객체를 ``computed``에 전달할 수 있도록 여러 객체를 하나로 병합하는 유틸리티를 사용해야합니다. 그러나 [객체 전개 연산자(Object Spread Operator)](https://github.com/tc39/proposal-object-rest-spread)을 사용하면 문법을 매우 단순화 할 수 있습니다.
+~~~js
+computed: {
+  localCOmputed () { /* ... */},
+  // 이것을 객체 전개 연산자(Object Spread Operator)를 사용하여 외부 객체에 추가 하십시오.
+  ...mapState({
+    // ...
+  })
+}
+~~~
+
+## 컴포넌트에는 여전히 로컬 상태가 있을 수 있습니다.
+Vuex를 사용한다고해서 Vuex에 __모든__ 상태를 넣어야하는 것은 아닙니다. Vuex에 더 많은 상태를 넣으면 상태 변이가 더 명확하고 디버그 가능하지만, 때로는 코드를 보다 장황하고 간접적으로 만들 수 있습니다. 상태 조각이 단일 컴포넌트에 엄격하게 속한 경우 로컬 상태로 남겨 둘 수 있습니다. 기회비용을 판단하고 앱의 개발 요구에 맞는 결정을 내려야 합니다.
+
+[내용출처 Vuex 공식사이트 State 하단](https://vuex.vuejs.org/kr/guide/state.html)
