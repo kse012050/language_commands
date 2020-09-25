@@ -128,22 +128,21 @@ getter를 다른 이름으로 매핑하려면 객체를 사용합니다.
 ~~~
 
 ### mapGetters 
-- Vuex에 선언한 state 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+- Vuex에 선언한 getters 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
 ~~~js
 // App.vue
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
-computed() {
-  ...mapState(['num'])
-  // num() { return this.$store.state.num; }
-}
+computed() {...mapState(['reverseMessage'])}
 
 // store.js
-state: {
-  num: 10
+getters: {
+  reverseMessage(state) {
+    return state.msg.split('').reverse().join('');
+  }
 }
 ~~~
 ~~~html
-<!-- <p>{{ this.$store.state.num }}</p> -->
-<p>{{ this.num }}</p>
+<!-- <p>{{ this.$store.getters.reverseMessage }}</p> -->
+<p>{{ this.reverseMessage }}</p>
 ~~~
