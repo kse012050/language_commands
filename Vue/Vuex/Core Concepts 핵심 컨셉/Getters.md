@@ -99,3 +99,30 @@ getters: {
 <p>{{ this.$store.getters.getNumber }}</p>
 <p>{{ this.$store.getters.doubleNumber }}</p>
 ~~~
+
+<hr>
+
+## ``mapGetters`` 헬퍼
+``mapGetters`` 헬퍼는 저장소 getter를 로컬 계산된 속성에 매핑합니다.
+~~~js
+import { mapGetters } from 'vuex'
+
+export default {
+  // ...
+  computed: {
+    // getter를 객체 전개 연산자(Object Spread Operator)로 계산하여 추가합니다.
+    ...mapGetters([
+      'doneTodosCount',
+      'anotherGetter',
+      // ...
+    ])
+  }
+}
+~~~
+getter를 다른 이름으로 매핑하려면 객체를 사용합니다.
+~~~js
+...mapGetters({
+  // this.doneCount를 store.getters.doneTodosCount에 매핑하십시오.
+  doneCount: 'doneTodosCount'
+})
+~~~
