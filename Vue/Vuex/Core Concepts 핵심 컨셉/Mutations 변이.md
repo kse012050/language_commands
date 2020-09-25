@@ -185,3 +185,42 @@ this.$store.commit('modifyState',{
     num : 20
 });
 ~~~
+
+## 사용예제
+> A : store.js , B : 하위 컴포넌트
+
+### B : 하위 컴포넌트
+~~~html
+   <button v-on:click="addItem"></button>
+   <!-- 
+     <태그명 v-on:event="함수1명"></태그명>
+    -->
+~~~
+
+~~~js
+export default {
+    methods:{
+      addItem:function(){
+        // 함수1 실행
+        this.$store.commit('addOneItem',this.newTodoItem);
+        // this.$store.commit('함수2명, [전달인자])
+        // 함수2 는 store.js 에서 실행될 함수명 넘길 인자
+        // 전달 인자가 많을 경우 {인자명 , 인자명} 객체로 변경 후 넘기면 된다
+      }
+    }
+  }
+~~~
+
+### A : store.js 상위 컴포넌트
+~~~js
+export const store = new Vuex.Store({
+    mutations:{
+        addOneItem(state, todoItem){
+          // 함수2(store.js에 있는 state , 전달 받은 인자)
+          실행 로직...
+        },
+    }
+}
+~~~
+
+<hr>
