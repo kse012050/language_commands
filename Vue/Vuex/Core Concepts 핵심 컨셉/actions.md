@@ -230,3 +230,27 @@ methods: {
     }
 }
 ~~~
+
+<hr>
+
+## mapActions
+- Vuex에 선언한 actions 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+~~~js
+// App.vue
+import { mapActions } from 'vuex'
+
+methods: {
+  ...mapActions(['delayClickBtn']),
+}
+
+// store.js
+actions: {
+  delayClickBtn(context) {
+    setTimeout(() => context.commit('clickBtn'), 2000);
+  }
+}
+~~~
+
+~~~html
+<button @click="delayClickBtn">delay popup message</button>
+~~~
