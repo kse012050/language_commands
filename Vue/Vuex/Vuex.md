@@ -104,3 +104,20 @@ console.log(store.state.count) // -> 1
 이제, 우리는 각 핵심 개념에 대해 더 자세히 설명 할 것입니다. [State](https://vuex.vuejs.org/kr/guide/state.html)부터 시작해 보겠습니다.  
   
 [내용출처 Vuex 공식사이트](https://vuex.vuejs.org/kr/)
+
+## 헬퍼의 유연한 문법
+- Vuex에 선언한 속성을 그대로 컴포넌트에 연결하는 문법
+~~~js
+// 배열 리터럴
+...mapMutations([
+  'clickBtn', // 'clickBtn' : clickBtn
+  'addNumber' // addNumber (인자)
+])
+~~~
+- Vuex에 선언한 속성을 컴포넌트의 특정 메서드에다가 연결하는 문법
+~~~js
+// 객체 리터럴
+...mapMutations({
+  popupMsg: 'clickBtn' // 컴포넌트 메서드 명 : Store의 뮤테이션명
+})
+~~~
