@@ -224,3 +224,28 @@ export const store = new Vuex.Store({
 ~~~
 
 <hr>
+
+
+## mapMutations
+- Vuex에 선언한 mutations 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+~~~js
+// App.vue
+import { mapMutations } from 'vuex'
+
+methods: {
+  ...mapMutations(['clickBtn']),
+  authLogin() {},
+  displayTable() {}
+}
+
+// store.js
+mutations: {
+  clickBtn(state) {
+    alert(state.msg);
+  }
+}
+~~~
+
+~~~html
+<button @click="clickBtn">popup message</button>
+~~~
