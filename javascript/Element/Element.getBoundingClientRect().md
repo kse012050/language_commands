@@ -31,4 +31,35 @@
 
 [출처 내용 MDN Element.getBoundingClientRect ()](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
 
-
+## 사용 예제
+~~~html
+<div></div>
+~~~
+~~~css
+div {
+    width: 400px;
+    height: 200px;
+    padding: 20px;
+    margin: 50px auto;
+    background: purple;
+}
+~~~
+~~~js
+let elem = document.querySelector('div');
+let rect = elem.getBoundingClientRect();
+console.log(rect);
+for (var key in rect) {
+    if(typeof rect[key] !== 'function') {
+        console.log(key + ' : ' + rect[key]);
+    }
+}
+~~~
+### 결과  console
+x : 740 
+y : 50
+width : 440  
+height : 240  
+top : 50  
+right : 1180  
+bottom : 290  
+left : 740  
