@@ -58,6 +58,6 @@ EventTarget.prototype.dispatchEvent = function(event){
     }
     return !event.defaultPrevented;
 }
-~~~
+~~~ 
 
 [내용출처 MDN EventTarget](https://developer.mozilla.org/ko/docs/Web/API/EventTarget)
