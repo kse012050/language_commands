@@ -363,3 +363,247 @@ var Something = function(element) {
 }
 var s = new Something(document.body);
 ~~~
+
+또 다른 해결책은 ``handleEvent()`` 라는 특수 함수를 사용하여 어떤 이벤트를 캐치 하는 것입니다.
+
+~~~js
+var Something = function(element) {
+  // |this| 새로 생성 된 객체입니다.
+  this.name = 'Something Good';
+  this.handleEvent = function(event) {
+    console.log(this.name); // '뭔가 좋은', 이것은 새로 생성 된 개체에 바인딩되어 있습니다.
+    switch(event.type) {
+      case 'click':
+        // 여기에 몇 가지 코드 ...
+        break;
+      case 'dblclick':
+        // 여기에 몇 가지 코드 ...
+        break;
+    }
+  };
+
+  // 이 경우 리스너는 this.handleEvent가 아니라 | this |입니다.
+  element.addEventListener('click', this, false);
+  element.addEventListener('dblclick', this, false);
+
+  // 리스너를 올바르게 제거 할 수 있습니다.
+  element.removeEventListener('click', this, false);
+  element.removeEventListener('dblclick', this, false);
+}
+var s = new Something(document.body);
+~~~
+
+``this`` 에 대한 참조를 처리하는 또 다른 방법은, ``EventListener`` 에 함수를 전달하는 것입니다.  
+이 함수는 접근을 필요로 하는 필드가 들어있는, 객체의 메서드를 호출하는 함수입니다.
+
+~~~js
+class SomeClass {
+
+  constructor() {
+    this.name = 'Something Good';
+  }
+
+  register() {
+    var that = this;
+    window.addEventListener('keydown', function(e) {return that.someMethod(e);});
+  }
+
+  someMethod(e) {
+    console.log(this.name);
+    switch(e.keyCode) {
+      case 5:
+        // 여기에 몇 가지 코드 ...
+        break;
+      case 6:
+        // 여기에 몇 가지 코드 ...
+        break;
+    }
+  }
+
+}
+
+var myObject = new SomeClass();
+myObject.register();
+~~~
+
+### 오래된 인터넷 익스플로러와 attachEvent
+인터넷 익스플로러 9 이전 버전에서는, 표준 ``addEventListener()`` 가 아닌 [``attachEvent()``](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) 를 사용해야 합니다. IE의 경우 위의 예제를 다음과 같이 수정합니다.
+
+~~~js
+if (el.addEventListener) {
+  el.addEventListener('click', modifyText, false); 
+} else if (el.attachEvent)  {
+  el.attachEvent('onclick', modifyText);
+}
+~~~
+
+``attachEvent()`` 의 단점은 다름과 같습니다. ``this``의 값이 이벤트가 바인드되어 있는 요소 대신에, ``window`` 객체에 대한 참조가 됩니다.  
+  
+``attachEvent()`` 메서드는 ``onresize`` 이벤트와 쌍을 이루어 웹 페이지의 특정 요소의 크기가 리사이징 되는 시점을 감지할 수 있습니다. ``mselementresize`` 라는 독점적인 이벤트는, 이벤트 핸들러를 등록하는 ``addEventListener`` 메서드와 함께 사용할 때 ``onresize``와 유사한 기능을 제공하여, 특정 HTML 요소의 크기를 리사징 할 때 사용됩니다.
+
+### 호환성
+스크립트 시작 부분에 다음 코드를 사용하여, 인터넷 익스플로러 8에서 지원하지 않는 ``addEventListener()``, ``removeEventListener()``, [``Event.preventDefault()``](https://developer.mozilla.org/ko/docs/Web/API/Event/preventDefault), [``Event.stopPropagation()``](https://developer.mozilla.org/ko/docs/Web/API/Event/stopPropagation) 을 해결할 수 있습니다. 이코드는 ``handleEvent()`` 와 [``DOMContentLoaded``](https://developer.mozilla.org/ko/docs/Web/Events/DOMContentLoaded) 이벤트에 대한 사용을 지원합니다.  
+  
+> __참고:__ IE8에서는 ``useCapture``를 지원할 수 있는 다른 방법이 없습니다. 다음의 코드는 IE8 지원만 추가합니다. 이 IE8 폴리필은 표준 모드에서만 작동합니다. doctype 선언이 필요합니다.  
+  
+~~~js
+(function() {
+  if (!Event.prototype.preventDefault) {
+    Event.prototype.preventDefault=function() {
+      this.returnValue=false;
+    };
+  }
+  if (!Event.prototype.stopPropagation) {
+    Event.prototype.stopPropagation=function() {
+      this.cancelBubble=true;
+    };
+  }
+  if (!Element.prototype.addEventListener) {
+    var eventListeners=[];
+    
+    var addEventListener=function(type,listener /*, useCapture (will be ignored) */) {
+      var self=this;
+      var wrapper=function(e) {
+        e.target=e.srcElement;
+        e.currentTarget=self;
+        if (typeof listener.handleEvent != 'undefined') {
+          listener.handleEvent(e);
+        } else {
+          listener.call(self,e);
+        }
+      };
+      if (type=="DOMContentLoaded") {
+        var wrapper2=function(e) {
+          if (document.readyState=="complete") {
+            wrapper(e);
+          }
+        };
+        document.attachEvent("onreadystatechange",wrapper2);
+        eventListeners.push({object:this,type:type,listener:listener,wrapper:wrapper2});
+        
+        if (document.readyState=="complete") {
+          var e=new Event();
+          e.srcElement=window;
+          wrapper2(e);
+        }
+      } else {
+        this.attachEvent("on"+type,wrapper);
+        eventListeners.push({object:this,type:type,listener:listener,wrapper:wrapper});
+      }
+    };
+    var removeEventListener=function(type,listener /*, useCapture (will be ignored) */) {
+      var counter=0;
+      while (counter<eventListeners.length) {
+        var eventListener=eventListeners[counter];
+        if (eventListener.object==this && eventListener.type==type && eventListener.listener==listener) {
+          if (type=="DOMContentLoaded") {
+            this.detachEvent("onreadystatechange",eventListener.wrapper);
+          } else {
+            this.detachEvent("on"+type,eventListener.wrapper);
+          }
+          eventListeners.splice(counter, 1);
+          break;
+        }
+        ++counter;
+      }
+    };
+    Element.prototype.addEventListener=addEventListener;
+    Element.prototype.removeEventListener=removeEventListener;
+    if (HTMLDocument) {
+      HTMLDocument.prototype.addEventListener=addEventListener;
+      HTMLDocument.prototype.removeEventListener=removeEventListener;
+    }
+    if (Window) {
+      Window.prototype.addEventListener=addEventListener;
+      Window.prototype.removeEventListener=removeEventListener;
+    }
+  }
+})();
+~~~
+
+### 이벤트 리스너를 등록하는 고전적인 방법
+```addEventListener()``는 DOM 2 [Events](https://www.w3.org/TR/DOM-Level-2-Events/) 명세와 함께 도입되었습니다. 그 전에는 다음과 같이 이벤트 리스너를 등록했습니다.
+
+~~~js
+// 함수 참조 전달? 함수를 호출하는 뒤에 '()'를 추가하지 마십시오!
+el.onclick = modifyText;
+
+// 함수 표현식 사용
+element.onclick = function() {
+  // ... 기능 논리 ...
+};
+~~~
+this 이 메서드는 요소의 기존 ``click`` 이벤트 리스너가 있을 경우에, 그것을 대체합니다. ``blur`` (``onblur``) 및 ``keypress`` (``onkeypress``) 와 같은 다른 이벤트 및 이벤트 핸들러도 비슷하게 작동합니다.  
+  
+이것은 본질적으로 [DOM 0]() 의 일부였기 때문에, 이벤트 리스너를 추가하는데 매우 광범위하게 지원되며 특별한 크로스 브라우징 코드가 필요하지 않습니다. 이것은 일반적으로 ``addEventListener()``의 추가 기능이 필요하지 않으면, 이벤트 리스너를 동적으로 등록하는 데 사용합니다.  
+  
+### 메모리 이슈
+~~~js
+var i;
+var els = document.getElementsByTagName('*');
+
+// Case 1
+for(i=0 ; i<els.length ; i++){
+  els[i].addEventListener("click", function(e){/*뭔가 해*/}, false);
+}
+
+// Case 2
+function processEvent(e){
+  /*뭔가 해*/
+}
+
+for(i=0 ; i<els.length ; i++){
+  els[i].addEventListener("click", processEvent, false);
+}
+~~~
+위의 첫 번째 경우, 루프의 각 반복마다 새로운 익명 핸들러 함수가 생성됩니다. 두 번째 경우에는 이전에 선언한 동일한 함수를 이벤트 핸들러로 사용하므로, 메모리 소비가 줄어듭니다. 또한 첫 번째 경우에는 removeEventListener()를 호출할 수 없습니다. 익명 함수에 대한 참조가 유지되지 않기 때문입니다. (루프가 생성할 수 있는 여러개의 익명 함수 중 하나에 보관되지 않습니다) 두 번째 경우에는 ``processEvent`` 가 함수 참조이기 때문에, ``myElement.removeEventListener("click", processEvent, false)`` 를 수행할 수 있습니다.  
+  
+사실, 메모리 소비와 관련하여, 함수 참조를 유지하는 것은 진짜 문제가 아닙니다. 오히려 정적 함수 참조를 유지하는 것이 부족합니다. 아래의 두 경우(3,4번째 케이스) 모두 함수 참조가 유지되지만, 각 반복에서 재정의 되므로 정적이 아닙니다. 세 번째 경우에는 익명 함수에 대한 참조가, 반복될 때 마다 다시 할당됩니다. 네 번째 경우에는 전체 함수 정의가 변경되지 않지만, 새로운 것처럼(컴파일러에 의해 [[promoted]]되지 않는 한) 반복적으로 정의되고 있고 그래서 정적이지 않습니다. 따라서 간단하게 [[여러개의 동일한 이벤트 리스너]]인 것처럼 보이지만, 두 경우 모두 각 반복은 핸들러 함수에 대한 고유한 참조로 새로운 리스너를 생성합니다. 그러나 함수 정의자체는 변경되지 않으므로, 모든 중복 리스너에 대해 같은 함수가 여전히 호출될 수 있습니다. (특히 코드가 최적화되는 경우)  
+  
+또한 두 경우 모두 함수 참조가 유지되었지만, 각 가산에 대해 반복적으로 재정의 되었습니다. 위에서 사용했던 remove 문(statement)으로는 리스너를 제거할 수 있지만, 마지막으로 추가한 리스너만 제거 됩니다.
+
+~~~js
+// 설명 전용 : [i]에 대해 [j]의 "MISTAKE"를 참고하여 원하는 이벤트를 모든 SAME 요소에 연결
+
+// Case 3
+for(var i=0, j=0 ; i<els.length ; i++){
+  /*j로 많은 일을하다*/
+  els[j].addEventListener("click", processEvent = function(e){/*do something*/}, false);
+}
+
+// Case 4
+for(var i=0, j=0 ; i<els.length ; i++){
+  /*j로 많은 일을하다*/
+  function processEvent(e){/*뭔가 해*/};
+  els[j].addEventListener("click", processEvent, false); 
+}
+~~~
+
+### passive 리스너로 스크롤링 성능 향상
+명세에 따르면, ``passive`` option의 기본값은 항상 ``false`` 입니다. 그러나 이것은 이벤트 리스너가 특정 터치 이벤트를 처리하는 경우(다른 이벤트를 포함하여), 스크롤을 처리하는 동안 브라우저의 메인 스레드를 차단하기 때문에, 스크롤 처리 시 성능이 크게 저하될 수 있습니다.  
+  
+이러한 문제를 방지하기 위하여, 일부 브라우저(특히 크롬과 파이어폭스)는 document-level nodes 인 [``window``](https://developer.mozilla.org/ko/docs/Web/API/Window), [``Document``](https://developer.mozilla.org/ko/docs/Web/API/Document), [``Document.body``](https://developer.mozilla.org/ko/docs/Web/API/Document/body) 의 경우 [``touchstart``](https://developer.mozilla.org/en-US/docs/Web/Events/touchstart) 와 [``touchmove``](https://developer.mozilla.org/en-US/docs/Web/API/Document/touchmove_event) 이벤트에 대해 ``passive`` 옵션의 기본값을 ``true``로 변경했습니다. 이렇게 하면 이벤트 리스너가 호출되지 않으므로, 사용자가 스크롤 하는 동안 페이지 랜더링을 차단할 수 없습니다.  
+  
+> __참고:__ 이 변경된 동작을 구현하는 브라우저(혹은 브라우저의 버전)을 알아야 할 경우 아래의 호환성 표를 참조하세요.  
+  
+다음과 같이 ``passive``의 값을 명시적으로 ``false``로 설정을 오버라이드 하여 이 동작을 무시할 수 있습니다.
+
+~~~js
+/* 기능 감지 */
+var passiveIfSupported = false;
+
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, "passive", { get: function() { passiveIfSupported = { passive: true }; } }));
+} catch(err) {}
+
+window.addEventListener('scroll', function(event) {
+  /* 뭔가 해 */
+  // 사용할 수 없다 event.preventDefault();
+}, passiveIfSupported );
+~~~
+  
+``addEventListener()``에 대한 ``options`` 매개변수를 지원하지 않는 이전 브라우저에서는 [feature detection](https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener#Safely_detecting_option_support) 를 사용하지 않고는 ``useCapture`` 인수를 사용하지 못하도록 해야 합니다.  
+  
+[``scroll``](https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event) 이벤트의 기본 ``passive`` 값에 대해 걱정할 필요는 없습니다. 취소할 수 없기 때문에, 이벤트 리스너는 페이지 랜더링을 차단할 수 없습니다.  
+  
+[내용출처 MDN EventTarget.addEventListener()](https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener)
