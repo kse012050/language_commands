@@ -31,4 +31,4 @@ var result = (function() {
 result; // Barry
 ~~~
 
-[내용출처 MDN IIFE(즉시 실행 함수 표현)](https://developer.mozilla.org/ko/docs/Glossary/IIFE)
+[내용출처 MDN IIFE(즉시 실행 함수 표현)](https://developer.mozilla.org/ko/docs/Glossary/IIFE) 
