@@ -25,9 +25,9 @@ void ctx.clearRect(x, y, width, height);
 직사각형의 높이. 양수 값은 아래로, 음수는 위로
 
 
-### Examples    예
+## Examples    예
 
-#### Erasing the whole canvas   캔버스 전체 지우기
+### Erasing the whole canvas   캔버스 전체 지우기
 이 코드 조각은 전체 캔버스를 지웁니다. 일반적으로 애니메이션의 각 프레임이 시작될 떄 필요합니다. 지워진 영역은 [``<canvas>``](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) 요소의 ``너비`` 및 ``높이`` 속성과 동일하게 설정됩니다.
 
 ~~~js
@@ -36,15 +36,15 @@ const ctx = canvas.getContext('2d');
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 ~~~
 
-#### Erasing part of a canvas   캔버스의 일부 지우기
+### Erasing part of a canvas   캔버스의 일부 지우기
 이 예제는 노란색 배경 위에 파란색 삼각형을 그립니다. 그런 다음 ``clearRect()`` 메서드는 캔버스의 일부를 지웁니다.
 
-##### HTML
+#### HTML
 ~~~html
 <canvas id="canvas"></canvas>
 ~~~
 
-##### JavaScript
+#### JavaScript
 지워진 여역은 직사각형 모양이며 왼쪽 상단 모서리는 (10,10)입니다. 지워진 영역의 너비는 120이고 높이는 100입니다.
 ~~~js
 const canvas = document.getElementById('canvas');
@@ -68,7 +68,7 @@ ctx.fill();
 ctx.clearRect(10, 10, 120, 100);
 ~~~
 
-##### Result
+#### Result
 ![clearRect() 결과 이미지](images/clearRect().png)
 
 [내용출처 MDN clearRect()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect)
