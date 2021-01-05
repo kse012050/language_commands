@@ -24,4 +24,35 @@ void ctx.fillRect(x, y, width, height);
 #### height
 직사각형의 높이. 양수 값은 감소하고 음수는 증가합니다.
 
-## Examples
+## Examples 예
+
+### A simple filled rectangle   단순하게 채워진 직사각형
+이 예제에서는 ``fillRect()`` 메서드를 사용하여 채워진 녹색 사각형을 그립니다.
+
+#### HTML
+~~~html
+<canvas id="canvas"></canvas>
+~~~
+
+#### JavaScript
+직사각형의 왼쪽 상단 모서리는 (20,10)입니다. 너비는 150이고 높이는 100입니다.
+~~~js
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+ctx.fillStyle = 'green';
+ctx.fillRect(20, 10, 150, 100);
+~~~
+
+#### Result
+![fillRect() 단순하게 채워진 직사각형 예제 이미지](images/fillRect().png)
+
+### Filling the whole canvas    캔버스 전체 채우기
+이 코드 조각은 전체 캔버스를 사각형으로 채웁니다. 이것은 종종 배경을 만드는 데 유용하며 그 위에 다른 것들을 그려 질 수 있습니다. 이를 위해 사각형의 크기는 [``<canvas>``](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) 요소의 ``너비`` 및 ``높이`` 속성과 동일하게 설정됩니다.
+
+~~~js
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+~~~
+
+[내용출처 MDN fillRect()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect)
