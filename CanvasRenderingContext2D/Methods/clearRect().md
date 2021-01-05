@@ -50,12 +50,12 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// Draw yellow background
+// Draw yellow background   노란색 배경 그리기
 ctx.beginPath();
 ctx.fillStyle = '#ff6';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// Draw blue triangle
+// Draw blue triangle   파란색 삼각형 그리기
 ctx.beginPath();
 ctx.fillStyle = 'blue';
 ctx.moveTo(20, 20);
@@ -64,7 +64,7 @@ ctx.lineTo(130, 130);
 ctx.closePath();
 ctx.fill();
 
-// Clear part of the canvas
+// Clear part of the canvas 캔버스의 명확한 부분
 ctx.clearRect(10, 10, 120, 100);
 ~~~
 
