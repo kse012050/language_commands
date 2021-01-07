@@ -1,5 +1,5 @@
 # CanvasRenderingContext2D.strokeRect()
-Canvas 2D API의 __``CanvasRenderingContext2D.strokeRect()``__ 메서드는 현재 [``strokeStyle``]() 및 기타 컨텍스트 설정에 따라 스트로크(윤곽선) 된 삼각형을 그립니다.  
+Canvas 2D API의 __``CanvasRenderingContext2D.strokeRect()``__ 메서드는 현재 [``strokeStyle``](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle) 및 기타 컨텍스트 설정에 따라 스트로크(윤곽선) 된 삼각형을 그립니다.  
   
 이 메서드는 현재 경로를 수정하지 않고 캔버스에 직접 그리므로 이후의 [``fill()``](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill) 또는 [``stroke()``](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke) 호출은 영향을 주지 않습니다.
 
