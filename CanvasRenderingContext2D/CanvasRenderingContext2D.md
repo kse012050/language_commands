@@ -54,4 +54,16 @@ ctx.stroke();
 #### [CanvasRenderingContext2D.strokeRect ()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect)
 현재 획 스타일을 사용하여 (x,y)에 시작점이 있고 너비가 w이고 높이가 h 인 사각형을 캔버스에 그립니다.
 
+### Drawing text    텍스트 그리기
+다음 메서드는 텍스트를 그립니다. 텍스트 속성은 [TextMetrics](https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics) 객체를 참조하십시오.
+
+#### [CanvasRenderingContext2D.fillText ()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText)
+주어진 (x,y) 위치에 주어진 텍스트를 그립니다 (채웁니다).
+
+#### [CanvasRenderingContext2D.strokeText ()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText)
+주어진 (x,y) 위치에 주어진 텍스트를 그립니다 (획).
+
+#### [CanvasRenderingContext2D.measureText ()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/measureText)
+[TextMetrics](https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics) 객체를 반환합니다.
+
 [내용 출처 MDN CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
