@@ -69,6 +69,6 @@ ctx.clearRect(10, 10, 120, 100);
 ~~~
 
 #### Result
-![clearRect() 결과 이미지](images/clearRect().png)
+![clearRect() 결과 이미지](images/clearRect.png)
 
 [내용출처 MDN clearRect()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect)
