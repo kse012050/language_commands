@@ -44,7 +44,7 @@ ctx.fillRect(20, 10, 150, 100);
 ~~~
 
 #### Result
-![fillRect() 단순하게 채워진 직사각형 예제 이미지](images/fillRect().png)
+![fillRect() 단순하게 채워진 직사각형 예제 이미지](images/fillRect().PNG)
 
 ### Filling the whole canvas    캔버스 전체 채우기
 이 코드 조각은 전체 캔버스를 사각형으로 채웁니다. 이것은 종종 배경을 만드는 데 유용하며 그 위에 다른 것들을 그려 질 수 있습니다. 이를 위해 사각형의 크기는 [``<canvas>``](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) 요소의 ``너비`` 및 ``높이`` 속성과 동일하게 설정됩니다.
