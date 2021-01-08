@@ -38,7 +38,7 @@ void ctx.strokeRect(x, y, width, height);
 
 
 #### Result
-![strokeRect() 단순한 획이 있는 직사각형](images/strokeRect()01.png)
+![strokeRect() 단순한 획이 있는 직사각형](images/strokeRect()01.PNG)
 
 ### Applying various context settings   다양한 컨텍스트 설정 적용
 이 예제는 그림자와 두껍고 경 사진 윤곽이 있는 직사각형을 그립니다.
@@ -56,6 +56,6 @@ ctx.strokeStyle = '#38f';
 ctx.strokeRect(30, 30, 160, 90);
 ~~~
 
-![strokeRect() 다양한 컨텍스트 설정 적용](images/strokeRect()02.png)
+![strokeRect() 다양한 컨텍스트 설정 적용](images/strokeRect()02.PNG)
 
 [내용출처 MDN strokeRect()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect)
