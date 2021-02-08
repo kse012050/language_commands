@@ -1,5 +1,5 @@
 # CanvasRenderingContext2D.strokeStyle
-Canvas 2D API의 ``__CanvasRenderingContext2D.strokeStyle__`` 속성은 모양 주변의 획 (육곽선)에 사용할 __색상__ , __그라데이션__ 또는 __패턴__ 을 지정합니다. 기본값은 #000 (__검은색__) 입니다.
+Canvas 2D API의 __``CanvasRenderingContext2D.strokeStyle``__ 속성은 모양 주변의 획 (육곽선)에 사용할 __색상__ , __그라데이션__ 또는 __패턴__ 을 지정합니다. 기본값은 #000 (__검은색__) 입니다.
 
 > 획 및 채우기 스타일의 더 많은 예제는 [Canvas 자습서](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)의 스타일 및 색상 적용을 참조하십시오.
 
