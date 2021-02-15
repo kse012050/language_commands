@@ -6,7 +6,7 @@ Canvas 2D API의 __``CanvasRenderingContext2D.arc()``__ 메서드는 현재 하�
 void ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise]);
 ~~~
 
-``arc()`` 메서드는 반경 반경으로` ``(x, y)``를 중심으로하는 원호를 만듭니다. 경로는 ``startAngle``에서 시작하고 ``endAngle``에서 끝나며 시계 반대 방향으로 지정된 방향으로 이동합니다 (기본값은 시계 방향).
+``arc()`` 메서드는 반경 반경으로 ``(x, y)``를 중심으로하는 원호를 만듭니다. 경로는 ``startAngle``에서 시작하고 ``endAngle``에서 끝나며 시계 반대 방향으로 지정된 방향으로 이동합니다 (기본값은 시계 방향).
 
 ### Parameters
 
