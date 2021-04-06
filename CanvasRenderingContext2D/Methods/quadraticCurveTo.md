@@ -56,4 +56,4 @@ void ctx.quadraticCurveTo(cpx, cpy, x, y);
 ~~~
 
 #### Result (결과)
-이 예에서 <span style="color:red;">제어점은 빨간색</span>이고 <span style="color:blue;">시작점과 끝점은 파란색</span>입니다.
+이 예에서 <span style="color:red;"> 제어점은 빨간색 </span>이고 <span style="color:blue;">시작점과 끝점은 파란색</span>입니다.
