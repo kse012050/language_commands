@@ -1,4 +1,4 @@
-# Document.createDocumentFragment()
+# Document.createDocumentFragment()  Fragment 파편
 새로운 빈 [``DocumentFragment``](https://developer.mozilla.org/ko/docs/Web/API/DocumentFragment) 를 생성합니다.
 
 ## 문법
