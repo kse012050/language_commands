@@ -274,5 +274,146 @@ console.log(animals);
 // expected output: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
 ~~~
 
+### Array.prototype.reduce()  아직 잘 모르겠다 따로 공부해야할 것 같다
+배열의 각 요소에 대해 주어진 reducer 함수를 실행하고, 하나의 결과값을 반환합니다.
+~~~js
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer, 5));
+// expected output: 15
+~~~
+
+### Array.prototype.reduceRight()   ??
+
+### Array.prototype.reverse()   ( reverse -> 역전 )
+배열의 순서를 반전합니다. 첫번째 요소는 마지막요소로, 마지막요소는 첫번째 요소로
+~~~js
+const array1 = ['one', 'two', 'three'];
+console.log('array1:', array1);
+// expected output: "array1:" Array ["one", "two", "three"]
+
+const reversed = array1.reverse();
+console.log('reversed:', reversed);
+// expected output: "reversed:" Array ["three", "two", "one"]
+
+// 주의 : reverse는 파괴적입니다. 원래 배열을 변경합니다.
+console.log('array1:', array1);
+// expected output: "array1:" Array ["three", "two", "one"]
+~~~
+
+### Array.prototype.shift()
+배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다.  
+이 메서드는 배열의 길이를 변하게 합니다.
+~~~js
+const array1 = [1, 2, 3];
+
+const firstElement = array1.shift();
+
+console.log(array1);
+// expected output: Array [2, 3]
+
+console.log(firstElement);
+// expected output: 1
+~~~
+
+### Array.prototype.slice()   ( slice -> 일부분)
+어떤 배열의 begin(시작) 부터 end까지 (end 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다.  
+원본 배열은 바뀌지 않습니다
+~~~js
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+
+console.log(animals.slice(2, 4));
+// expected output: Array ["camel", "duck"]
+
+console.log(animals.slice(1, 5));
+// expected output: Array ["bison", "camel", "duck", "elephant"]
+~~~
+
+### Array.prototype.some()    ( some-> 약간 )
+배열 안의 어떤 요소라도 주어진 판별 함수를 통과하는지 테스트 합니다.
+> __참고 :__ 빈 배열에서 호출하면 무조건 ``false``를 반환합니다.
+~~~js
+const array = [1, 2, 3, 4, 5];
+
+// 요소가 짝수인지 확인
+const even = (element) => element % 2 === 0;
+
+console.log(array.some(even));
+// expected output: true
+~~~
+다음 예제는 배열 내 요소 중 하나라도 10보다 큰지 판별합니다.
+~~~js
+function isBiggerThan10(element, index, array) {
+  return element > 10;
+}
+[2, 5, 8, 1, 4].some(isBiggerThan10);  // false
+[12, 5, 8, 1, 4].some(isBiggerThan10); // true
+~~~
+
+### Array.prototype.sort()    ( sort->종류 )
+배열의 요소를 적절한 위치에 __정렬__ 한 후 그 배열을 반환합니다.  
+정렬은 [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) 가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다
+~~~js
+const months = ['March', 'Jan', 'Feb', 'Dec'];
+months.sort();
+console.log(months);
+// expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+const array1 = [1, 30, 4, 21, 100000];
+array1.sort();
+console.log(array1);
+// expected output: Array [1, 100000, 21, 30, 4]
+~~~
+
+### Array.prototype.splice()  ( splice-> 접착 )
+기존 요소를 __삭제__ 또는 __교체__ 하거나 __새 요소__ 를 추가하여 배열의 내용을 변경합니다.
+~~~js
+const months = ['Jan', 'March', 'April', 'June'];
+months.splice(1, 0, 'Feb');
+// 인덱스 1에 삽입
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+months.splice(4, 1, 'May');
+// 인덱스 4에서 요소 1 개를 대체합니다.
+console.log(months);
+// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+~~~
+
+### Array.prototype.toLocaleString()
+??
+
+### Array.prototype.toString()
+지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다.
+~~~js
+const array1 = [1, 2, 'a', '1a'];
+
+console.log(array1.toString());
+// expected output: "1,2,a,1a"
+~~~
+
+### Array.prototype.unshift()
+새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
+~~~js
+const array1 = [1, 2, 3];
+
+console.log(array1.unshift(4, 5));
+// expected output: 5
+
+console.log(array1);
+// expected output: Array [4, 5, 1, 2, 3]
+~~~
+
+### Array.prototype.values()
+배열의 각 인덱스에 대한 값을 가지는 새로운 Array Iterator 객체를 반환합니다.
 
 [내용출처 MDN Array의 Methods를 간단하게 정리 중이다](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
