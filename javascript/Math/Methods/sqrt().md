@@ -1,4 +1,4 @@
-# Math.sqrt()
+# Math.sqrt() - square root 제곱근
 ``Math.sqrt()`` 함수는 숫자의 제곱근을 반환합니다
 
 ## 문법
