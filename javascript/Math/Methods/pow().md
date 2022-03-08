@@ -1,4 +1,4 @@
-# Math.pow() - power root() 거듭제곱근
+# Math.pow() - power root 거듭제곱근
 ``Math.pow()``함수는 ``base^exponent``처럼 ``base`` 에 ``exponent``를 제곱한 값을 반환합니다.
 ~~~js
 console.log(Math.pow(7, 3));
