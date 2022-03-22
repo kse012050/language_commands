@@ -13,6 +13,6 @@ __``Element.clientWidth``__ 인라인 요소와 CSS가 없는 요소의 경우 �
 이 ``clientWidth`` 속성은 읽기 전용입니다.
 
 ## Example 예
-![element.clientWidthImg](element.clientWidthImg.png)
+![element.clientWidthImg](images/element.clientWidthImg.png)
 
 [내용 출처 MDN element.clientWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth)

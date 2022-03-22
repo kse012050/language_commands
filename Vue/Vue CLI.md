@@ -69,5 +69,7 @@ yarn global upgrade --latest @vue/cli
 ### 프로젝트 종속성
 위에 표시된 업그레디으 명령은 글로벌 Vue CLI 설치에 적용됩니다. 프로젝트 내에서 하나 이상의 ``@vue/cli`` 관련 패키지 (로 시작하는 패키지 포함) 를 업그레이드하려면 프로젝트 디렉터리 내에서 ``@vue/cli-plugin-`` 실행하세요 ``vue upgrade``
 
+## 파일 위치
+C:\Users\김성은\AppData\Roaming\npm  
 
 [출처 내용 Vue CLI](https://cli.vuejs.org/guide/)
