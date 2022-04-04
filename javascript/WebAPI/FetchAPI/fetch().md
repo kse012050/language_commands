@@ -1,3 +1,4 @@
+https://developer.mozilla.org/en-US/docs/Web/API/fetch#examples
 # fetch()
 전역 ``fetch()`` 메서드는 네트워크에서 리소스를 가져오는 프로세스를 시작하여 응답을 사용할 수 있게 되면 이행된 promise을 반환합니다.  
   
@@ -15,3 +16,19 @@ fetch() promise는 네트워크 오류가 발생한 경우에만 거부합니다
 ~~~js
 const fetchResponsePromise = fetch(resource [, init])
 ~~~
+
+### Parameters 매개변수
+
+#### resource
+가져오려는 리소스를 정의합니다.   
+다음 중 하나일 수 있습니다.
+
+- 가져올 리소스의 URL을 제공하는 문자열 또는 [stringifier](https://developer.mozilla.org/en-US/docs/Glossary/Stringifier)가 있는 기타 개체(URL 개체 포함).
+- 요청 개체입니다.
+
+#### init (Optional : 선택항목)
+요청에 적용하려는 사용자 지정 설정이 포함된 개체입니다.  
+가능한 옵션은 다음과 같습니다.
+
+##### method
+요청 방법(예: GET, POST). HEAD 또는 GET 방식의 Fetch 요청에는 Origin 헤더가 설정되지 않습니다. (이 동작은 Firefox 65에서 수정되었습니다 — 버그 1508661 참조).
