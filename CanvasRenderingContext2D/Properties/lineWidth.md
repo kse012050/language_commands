@@ -29,4 +29,7 @@ ctx.rect(40, 40, 70, 70);
 ctx.stroke();
 ~~~
 
-[내용출처 MDN 선 둙기](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth)
+#### Result
+![lineWidth 결과 이미지](images/lineWidth.png)
+
+[내용출처 MDN 선 굵기](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth)
