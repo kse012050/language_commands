@@ -63,3 +63,5 @@ ctx.stroke();
 
 #### Result
 ![closePath() 결과 이미지](./images/closePath()02.png)
+
+[내용출처 MDN closePath() 시작점과 마지막 부분을 연결해준다](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/closePath)
