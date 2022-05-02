@@ -363,4 +363,4 @@ if (!Array.prototype.mapUsingReduce) {
 ); // [5, 7, , 10]
 ~~~
 
-[내용출처 MDN reduce() ](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+[내용출처 MDN reduce() 배열.reduce(function(누적값,현재값,인덱스,array){},초기값) ](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
