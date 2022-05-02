@@ -7,12 +7,14 @@
     <title>Document</title>
     <script>
         const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
+        animals.map(function(a , b , c){
+            console.log(a);
+            console.log(b);
+            console.log(c);
 
-console.log(animals.lastIndexOf('Dodo'));
-// expected output: 3
+            console.log(this);
+        },[1,2,3,4])
 
-console.log(animals.lastIndexOf('Tiger'));
-// expected output: 1
     </script>
 </head>
 <body>
