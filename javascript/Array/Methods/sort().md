@@ -196,3 +196,21 @@ var result = mapped.map(function(el){
 ~~~
 
 [내용출처 MDN sort() 배열 정렬하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+
+## 실 사용 예 
+
+### 오른차순
+~~~js
+const numbers = [15, 52, 23, 11, 9]; 
+
+// 오름차순 정렬, 원본 배열 수정 
+numbers.sort((a, b) => a - b); console.log(numbers); // [9, 11, 15, 23, 52] 
+~~~
+
+### 내림차순
+~~~js
+const numbers = [15, 52, 23, 11, 9]; 
+
+// 내림차순 정렬, 원본 배열이 다시 수정 
+numbers.sort((a, b) => b - a); console.log(numbers); // [52, 23, 15, 11, 9]
+~~~
