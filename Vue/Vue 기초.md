@@ -13,7 +13,7 @@ new Vue({
 });
 ~~~
 
-### 사용법
+### 기초 사용법
 ~~~js
 import Basic from './view/Basic.vue'
 export default {
@@ -93,6 +93,9 @@ export default {
   }
 }
 ~~~
+
+### 라이프 사이클 훅
+
 
 ## Vuex
 store로 관리?
