@@ -6,15 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
-        animals.map(function(a , b , c){
-            console.log(a);
-            console.log(b);
-            console.log(c);
-
-            console.log(this);
-        },[1,2,3,4])
-
+        let array = [1,2,3];
+        let array2 = array;
+        array[0] = 4;
+        console.log(array2);    /* [4,2,3] 출력 */
     </script>
 </head>
 <body>
