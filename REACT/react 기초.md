@@ -51,6 +51,10 @@ copy[0] = '글제목 변경'     /* copy(배열)의 첫번째 내용을 '글제�
 배열변수는 새로 만들어서 넣어줘야 배열을 가르키는 ``키`` 값이 변경되면서 내용이 변경되었다고 판단한다  
 변경되었다고 인식해야 값을 변경해준다  
 [내용출처 애플코딩 개념설명 동영상](https://codingapple.com/unit/react-5-setstate-homework-edit-button/?id=2305)
+> array , object는 ``reference data type`` 이라서..?  
+> 더 공부하고 싶으면 ``reference data type`` 찾아서 공부  
+  
+
 ## event
 event(``click``) 삽입 방법  
 함수를 따로 만들어서 넣을 수 있고, 함수를 만들지 않고 바로 로직 작성도 가능하다
