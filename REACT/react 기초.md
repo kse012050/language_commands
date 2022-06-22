@@ -6,6 +6,28 @@ js 파일 최상단에 넣으면 터미널 ``WARNING`` 메세지를 출럭하지
 /* esline-disable */
 ~~~
 
+## component 생성
+~~~js
+function componentName(){
+  return (
+    // case01
+    <div></div> /* return 안 최상위 태그는 하나만 */
+
+    // case02
+    <></>   /* 최상위 태그 생성하지 않고 넣기 */
+  )
+}
+~~~
+생성한 ``componenet`` 적용하는 방법
+~~~html
+<!-- case01 -->
+<componentName></componentName> 
+
+<!-- case02 -->
+<componentName/>
+~~~
+
+
 
 ## useState()
 __destructuring__ 문법
