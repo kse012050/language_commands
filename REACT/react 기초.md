@@ -8,6 +8,7 @@ js 파일 최상단에 넣으면 터미널 ``WARNING`` 메세지를 출럭하지
 
 ## component 생성
 ~~~js
+// case01
 function componentName(){
   return (
     // case01
@@ -15,6 +16,14 @@ function componentName(){
 
     // case02
     <></>   /* 최상위 태그 생성하지 않고 넣기 */
+  )
+}
+
+// case02
+const componentName = () =>{
+  return (
+    <>
+    </>
   )
 }
 ~~~
@@ -78,6 +87,8 @@ copy[0] = '글제목 변경'     /* copy(배열)의 첫번째 내용을 '글제�
   
 
 ## event
+
+### 단순 클릭
 event(``click``) 삽입 방법  
 함수를 따로 만들어서 넣을 수 있고, 함수를 만들지 않고 바로 로직 작성도 가능하다
 ~~~jsx
@@ -92,5 +103,28 @@ function App() {
         <span onClick={ ()=>{로직} }>👍</span></h4>
     </div>
   );
+}
+~~~
+
+### 스위치 클릭
+~~~js
+function App(){
+  let [switch , setSwitch] = useState(true) /* 꼭 boolean type일 필요는 없다, 문자열 , 숫자 다 가능 */
+
+  return(
+    <div>
+      { switch ? <SwitchClick></SwitchClick> : null } 
+    </div>
+  )
+  // 삼항 연산자 사용 , return안 {} 안에서는 if , for는 사용할 수 없다?!
+}
+
+// component 생성
+function SwitchClick(){
+  return(
+    <div>
+      click 하면 나오고 다시 click 하면 없어지고
+    </div>
+  )
 }
 ~~~
