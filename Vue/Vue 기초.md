@@ -118,12 +118,18 @@ vuex 사용 전
   <div>
     <!-- v-bind 하위 컴포넌트로 데이터 전달 -->
     <!-- v-on 하위 컴포넌트에서 넘어온 이벤트 -->
-    <sub-components v-bind:하위컴포넌트 변수 명="상위 컴포넌트에서 보내는 변수 명" 
-    v-on:하위 컴포넌트에서 넘어온 이벤트 이름="상위 컴포넌트에서 실행할 함수명(매개변수)">
+    <sub-components 
+      v-bind:하위컴포넌트 변수 명="상위 컴포넌트에서 보내는 변수 명" 
+      v-on:하위 컴포넌트에서 넘어온 이벤트 이름="상위 컴포넌트에서 실행할 함수명(매개변수)
+      ">
     </sub-components>
     <!-- 매개변수가 없다면 () 생략가능 -->
 
-    <sub-components v-bind:propsdata="num"></sub-components>
+    <sub-components 
+      v-bind:propsdata="num"
+      v-on:passEvent="numIncrea"
+    >
+    </sub-components>
   </div>
 </template>
 ~~~
@@ -157,6 +163,8 @@ sub component
     <div>
         {{ propsdata }}
         <button v-on:click="하위 컴포넌트에 있는 함수 명">click</button>
+
+        <button v-on:click="testEvent">click</button>
     </div>
 </template>
 ~~~
@@ -165,13 +173,14 @@ export default {
     props : ['propsdata'],
     methods : {
       함수명 : function(){
-        this.$emit('상위 컴포넌트로 넘길 이벤트 이름' , 데이터);
+        this.$emit('상위 컴포넌트로 넘길 이벤트 이름' , 넘길 데이터);
         // 넘길 데이터가 없다면 생략 가능
-      }
+      },
 
       // 축약
-      함수명(){
-
+      testEvent(){
+        this.$emit('passEvent' , 넘길 데이터)
+        // 넘길 데이터가 없다면 생략 가능
       }
     }
 }
