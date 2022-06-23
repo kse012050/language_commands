@@ -14,18 +14,22 @@ new Vue({
 ~~~
 
 ### 기초 사용법
+~~~html
+<template>
+  <div>
+    <button v-on:click="실행할 methods 함수 명(매개변수)">click</button>
+    <!-- 매개 변수가 없다면 () 생략 가능 -->
+  </div>
+</template>
+~~~
 ~~~js
 import Basic from './view/Basic.vue'
 export default {
   data(){
     return {
-      str : '문자열',
-      num : 1205,
-      array : [1,2,3],
-      obj : {
-        a : 'A',
-        b : 1,
-      }
+      변수명1 : 데이터,
+      변수명1 : 데이터,
+      // 숫자 , 문자열 , 배열 , 오브젝트 다 가능하다
     }
   },
   computed : {
@@ -62,6 +66,15 @@ export default {
 ~~~
 
 #### 예
+~~~html
+<template>
+  <div>
+    <h2>현재 컴포넌트에서 데이터 실험</h2>
+    {{ num }}
+    <button v-on:click="test01(10)">click</button>
+  </div>
+</template>
+~~~
 ~~~js
 export default {
   data(){
@@ -96,6 +109,71 @@ export default {
 
 ### 라이프 사이클 훅
 
+## 데이터 전달
+vuex 사용 전
+
+### 상위 컴포넌트
+~~~html
+<template>
+  <div>
+    <!-- v-bind 하위 컴포넌트로 데이터 전달 -->
+    <!-- v-on 하위 컴포넌트에서 넘어온 이벤트 -->
+    <sub-components v-bind:하위컴포넌트 변수 명="상위 컴포넌트에서 보내는 변수 명" v-on:하위 컴포넌트에서 넘어온 이벤트 이름="상위 컴포넌트에서 실행할 함수명(매개변수)"></sub-components>
+    <!-- 매개변수가 없다면 () 생략가능 -->
+
+    <sub-components v-bind:propsdata="num"></sub-components>
+  </div>
+</template>
+~~~
+~~~js
+import SubComponenet from '경로'
+export default{
+  data(){
+    return {
+      num : 1,
+    }
+  },
+  components : {
+    SubComponent
+  },
+  methods : {
+    함수명 : function(매개변수){
+
+    },
+
+    // 축약
+    numIncrea(a){
+      this.num = this.num + a;
+    }
+  }
+}
+~~~
+### 하위 컴포넌트
+sub component
+~~~html
+<template>
+    <div>
+        {{ propsdata }}
+        <button v-on:click="하위 컴포넌트에 있는 함수 명">click</button>
+    </div>
+</template>
+~~~
+~~~js
+export default {
+    props : ['propsdata'],
+    methods : {
+      함수명 : function(){
+        this.$emit('상위 컴포넌트로 넘길 이벤트 이름' , 데이터);
+        // 넘길 데이터가 없다면 생략 가능
+      }
+
+      // 축약
+      함수명(){
+
+      }
+    }
+}
+~~~
 
 ## Vuex
 store로 관리?
