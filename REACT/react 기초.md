@@ -174,3 +174,10 @@ function SwitchClick(){
   )
 }
 ~~~
+
+### input 내용 가져오기
+~~~js
+<input type="text" onChange={(e)=> console.log(e.target.value)}/>
+<input type="text" onInput={(e)=> console.log(e.target.value)}/>
+// onChange , onInput 은 동일하다?!!
+~~~
