@@ -84,7 +84,53 @@ copy[0] = '글제목 변경'     /* copy(배열)의 첫번째 내용을 '글제�
 [내용출처 애플코딩 개념설명 동영상](https://codingapple.com/unit/react-5-setstate-homework-edit-button/?id=2305)
 > array , object는 ``reference data type`` 이라서..?  
 > 더 공부하고 싶으면 ``reference data type`` 찾아서 공부  
-  
+
+## 데이터 전송 (props)
+~~~js
+function App(){
+  let [변수명 , 리셋변수명] = useState([]);
+  return (
+    <>
+      <하위컴포넌트 하위 컴포넌트에서 사용할 이름={상위 컴포넌트 변수 명}></하위컴포넌트>
+    </>
+    // 변수 뿐 아니라 함수 등... 다양한 것들을 다 넘길 수 있다
+    // 변수 , 함수 등..
+  )
+}
+
+function 하위컴포넌트(상위컴포넌트에서 넘어온 데이터){ /* object로 넘어온다 */
+  return (
+    <>
+      { 매개변수.데이터 이름 }
+    </>
+  )
+}
+~~~
+### 예
+~~~js
+function App(){
+  let [글제목 , 글제목변경] = useState([]);
+  return (
+    <>
+      <Modal 
+        글제목하위={글제목}
+        글제목변경하위={글제목변경}
+      ></Modal>
+    </>
+    // 변수 뿐 아니라 함수 등... 다양한 것들을 다 넘길 수 있다
+    // 변수 , 함수 등..
+  )
+}
+
+function Modal(props){ /* object로 넘어온다 */
+  return (
+    <>
+      { props.글제목하위 }
+      { props.글제목변경 }
+    </>
+  )
+}
+~~~
 
 ## event
 
