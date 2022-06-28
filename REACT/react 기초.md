@@ -6,6 +6,29 @@ js 파일 최상단에 넣으면 터미널 ``WARNING`` 메세지를 출럭하지
 /* esline-disable */
 ~~~
 
+## 파일 상대 경로로 연결하기
+
+### public
+그냥 상대 경로로 연결하면 된다
+
+### src 폴더에 파일이 있는 경우
+#### js , jsx
+~~~js
+import 네이밍 from '상대경로';
+
+return (
+  <>
+    <img src={네이밍}/>
+  </>
+)
+~~~
+#### css
+~~~css
+div{background-image:url('상대경로');}
+~~~
+
+
+
 ## component 생성
 ~~~js
 // case01
