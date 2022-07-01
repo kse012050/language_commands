@@ -110,7 +110,7 @@ copy[0] = '글제목 변경'     /* copy(배열)의 첫번째 내용을 '글제�
 
 ## useEffect()
 컴포넌트가 ``랜더링`` 이후에 어떤 일을 수행해야 하는지를 말한다  
-[좀 더 내용이 알고 싶다면 react 공식 사이트 useEffect()][https://ko.reactjs.org/docs/hooks-effect.html]  
+[좀 더 내용이 알고 싶다면 react 공식 사이트 useEffect()](https://ko.reactjs.org/docs/hooks-effect.html)
 
 ### 사용법
 ~~~js
