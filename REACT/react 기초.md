@@ -108,6 +108,57 @@ copy[0] = '글제목 변경'     /* copy(배열)의 첫번째 내용을 '글제�
 > array , object는 ``reference data type`` 이라서..?  
 > 더 공부하고 싶으면 ``reference data type`` 찾아서 공부  
 
+## useEffect()
+컴포넌트가 ``랜더링`` 이후에 어떤 일을 수행해야 하는지를 말한다  
+[좀 더 내용이 알고 싶다면 react 공식 사이트 useEffect()][https://ko.reactjs.org/docs/hooks-effect.html]  
+
+### 사용법
+~~~js
+ useEffect(()=>{ /* 랜더링(HTML)이 되고 나서 실행 */
+        // mount(장착) , update시 여기 코드 실행
+        return () =>{   /* mount(장착)시 실행 안됨 , unmount(제거)시 실행 됨 */
+            // useEffect 가 실행하기 전에 실행할 코드
+            // 예 > 
+            // 기존 타이머는 제거해주세요~
+            // 기존 데이터요청은 제거해주세요~
+        }
+    },[count1 , count2]);
+~~~
+
+#### 빡통식 정리의 시간
+~~~js
+    useEffect(()=>{ })     /*  1. 재랜더링마다 코드 실행하고 싶으면 */
+    useEffect(()=>{ } , []) /* 2. mount시 1회 코드실행하고 싶으면 */
+    useEffect(()=>{
+        return ()=>{
+            /* 3. unmount시 1회 코드실행하고 싶으면 */
+        }
+    })
+    useEffect(()=>{ return()=>{
+        /* 4. useEffect 실행 전에 뭔가 실행하려면 언제나 return ()=>{} */
+    } })
+    useEffect(()=>{ return()=>{
+        /* 4. useEffect 실행 전에 뭔가 실행하려면 언제나 return ()=>{} */
+    } } , [])
+
+    useEffect(()=>{ } , [특정state])    /* 5. 특정 state 변경시에만 실행하려면 [state명] */
+~~~
+
+### 구 버전 사용법
+~~~js
+class componentName extends React.Component{
+    componentDidMount(){
+        // 컴포넌트 mount(장착)시 여기 코드 실행
+    }
+    componentDidUpdate(){
+        // 컴포넌트 update시 여기 코드 실행
+    }
+    componentWillUnmount(){
+        // 컴포넌트 unmount(삭제)시 여기 코드 실행
+    }
+}
+~~~
+
 ## 데이터 전송 (props)
 ~~~js
 function App(){
