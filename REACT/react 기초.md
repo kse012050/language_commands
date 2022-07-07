@@ -204,6 +204,15 @@ function Modal(props){ /* object로 넘어온다 */
     </>
   )
 }
+// props 축약 가능
+function Modal({글제목하위 , 글제목변경}){ 
+  return (
+    <>
+      {글제목하위}
+      {글제목변경}
+    </>
+  )
+}
 ~~~
 
 ## event
