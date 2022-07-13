@@ -258,6 +258,46 @@ function SwitchClick(){
 }
 ~~~
 
+## animation , transition 주는 법
+~~~css
+.start{
+  opacity: 0;
+}
+.end{
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+~~~
+~~~js
+// case01 page 전환시 애니메이션
+export default function Detail(props) {
+  let [fade , setFade] = useState('')
+
+  useEffect(()=>{
+      setFade('end');
+  }, [fade])
+
+  return (
+    <div className={"container start " + fade}>
+    </div>
+  )
+}
+
+// case02   tab에 animation
+function TabContent({탭}){
+  useEffect(()=>{
+      setTimeout(()=>{
+          setFade('end');
+      },100)
+      return ()=>{
+          setFade('');
+      }
+  }, [탭]);
+
+  return (<div className={"start " + fade}>{[<div>내용0</div> , <div>내용1</div> , <div>내용2</div>][탭]}</div>)
+}
+~~~
+
 ### input 내용 가져오기
 ~~~js
 <input type="text" onChange={(e)=> console.log(e.target.value)}/>
