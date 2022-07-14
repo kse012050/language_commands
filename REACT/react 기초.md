@@ -207,6 +207,7 @@ export default function Detail() {
   )
 }
 
+// 컴포넌트를 다른 js 파일로 만들어서 붙여도 상관없다
 function TabContent(){
   let { 재고 , 데이터} = useContext(Context1);
   let objTest = useContext(Context1);
