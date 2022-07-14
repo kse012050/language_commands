@@ -159,6 +159,73 @@ class componentName extends React.Component{
 }
 ~~~
 
+## useContext()
+상위 컴포넌트에서 멀리 떨어진(중첩구조의) 하위 컴포넌트로 데이터를 전송할 때 사용된다 
+아무리 깊숙히 있어도, 모든 컴포넌트가 이 값을 읽을 수 있습니다   
+많이 사용되지는 않는다  
+그 이유는 ( Context API 특징)
+1. state 변경시 쓸데없는 것까지 재랜더링 된다
+2. 나중에 컴포넌트 재사용이 어렵다 (컴포넌트를 다른 페이지에서 사용할려고 할 때..)
+> 그래서 __외부 라이브러리 ( Redux 등)__ 을 사용해서 작업한다
+
+### 사용법
+#### App.js
+~~~js
+import './App.css';
+import { useState , createContext} from 'react';
+import Detail from './routes/Detail.jsx'
+
+function App() { 
+  let [재고] = useState([10,20,30]);
+  let [데이터] = useState(['뭐로 하지','몰라','아무거나 해']);
+
+  export let Context1 = createContext();
+  // 다른 컴포넌트에서 사용할 것이기 때문에 export 해준다
+
+  return (
+    <>
+      <Context1.Provider value={{ 제고 , 데이터}}>
+        <Detail />
+      </Context1.Provider>
+    </>
+    // useContext() 를 사용할 컴포넌트를 useContext()가 담겨있는 변수로 감싸줘야 한다 (.Provider를 붙여줘야 한다)
+    // value 속성을 이용해서 여러개의 변수( , 로 구분 )를 넘길 수 있다
+  )
+}
+~~~
+
+#### detail.jsx
+~~~js
+import { Context1 } from './../App.js'
+import { useContext } from "react";
+
+export default function Detail() {
+  return (
+    <>
+      <TabContent />
+    </>
+  )
+}
+
+function TabContent(){
+  let { 재고 , 데이터} = useContext(Context1);
+  let objTest = useContext(Context1);
+  // 데이터를 넘길 때 {}(오브젝트)로 넘겼기 때문에 오브젝트로 넘어온다
+
+  return (
+    <>
+      <div>{ 재고[0] }</div> 
+      <div>{ 재고[1] }</div> 
+      <div>{ 재고[2] }</div>
+      <div>{ objTest.재고[0]}</div>
+      <div>{ objTest.재고[1]}</div>
+      <div>{ objTest.재고[2]}</div>
+    </>
+    // `재고` 데이터와 objText.재고[0] 은 같은 결과 값을 갖는다
+  )
+}
+~~~
+
 ## 데이터 전송 (props)
 ~~~js
 function App(){
