@@ -222,7 +222,7 @@ function TabContent(){
       <div>{ objTest.재고[1]}</div>
       <div>{ objTest.재고[2]}</div>
     </>
-    // `재고` 데이터와 objText.재고[0] 은 같은 결과 값을 갖는다
+    // `재고` 데이터와 `objText.재고[0]` 데이터는 같은 결과 값을 갖는다
   )
 }
 ~~~
