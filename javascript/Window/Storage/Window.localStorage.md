@@ -41,3 +41,22 @@ localStorage.clear();
 
 [내용출처 MDN](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
 
+## 실 사용 법
+localStorage에는 문자열('') 만들어가기 때문에 array , object 는 string 값으면 바꿔서 넣어야 한다
+
+### array , object => string으로 변경하는 방법
+~~~js
+JSON.stringify(data)
+~~~
+
+localStorage에서 꺼내온 data는 string 값이기 때문에 다시 array , object로 변경해야 한다
+
+### string => array , object 로 변경하는 방법
+~~~js
+JSON.parse(localStorege에서 가져온 데이터);
+
+JSON.parse(localStorage.getItem('키'));
+~~~
+
+
+
