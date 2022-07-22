@@ -42,6 +42,8 @@ function SubPage() {
             console.log('요청됨');
             return a.data 
         }),
+        { staleTime : 2000 }
+        // staleTime을 이용해서 반복 실행 주기를 설정할 수 있다
     })  
     result.data       
     /* 성공했을 때 가져 오는 데이터 */
