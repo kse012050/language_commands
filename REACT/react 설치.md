@@ -26,14 +26,20 @@ package 추가
 
 
 ## 개발툴과 익스텐션
-### 익스텐션
+### 크롬 익스텐션
 Chrome 웹 스토어   
 https://chrome.google.com/webstore/category/extensions?hl=ko  
-  
+
+#### reactjs dev 
 검색 : reactjs dev  
 React Developer Tools - 제공자 : Facebook 설치  
+
+#### Redux DevTools
+검색 : Redux DevTools 
+store 한눈에 볼 수 있다  
+state 변경한 내역 알려준다
   
-### 개발툴
+### 개발툴 vsCode 익스텐션
 #### Reactjs code snippets
 React 자동완성??
 
