@@ -187,6 +187,57 @@ class componentName extends React.Component{
 }
 ~~~
 
+## useMemo()
+함수를 최초 랜더링할 때 한번만 실행되게 하는 훅  
+``useEffect()`` 와 유사하지만 실행 되는 시점이 다르다  
+> useEffect() : HTML이 다 실행하고 실행한다  
+> useMemo() : HTML이 랜더링 될 때 실행한다
+
+### 사용법
+#### component.js
+~~~js
+import { useMemo} from 'react';
+function 함수(){
+
+}
+
+function Component(){
+  useMemo(()=>{
+    return 함수()
+  } , [state])
+  // state가 변경될 때만 실행
+}
+~~~
+
+### memo()
+컴포넌트가 재랜더링될 때 변화가 없는 하위 컴포넌트도 같이 랜더링 된다  
+변화가 없는 하위 컴포넌트의 랜더링을 막는다
+
+#### 사용법
+##### component.js
+~~~js
+import {  useState } from 'react';
+
+let Child = memo(function(){
+  console.log('재랜더링됨');
+  return <div>하위 컴포넌트</div>
+})
+
+function Component(){
+  let [count , setCount] = useState(0)
+  return (
+    <div>
+      <Child count={count}></Child>
+      <button onClick={()=>{
+        setCount(count++)
+      }}>+</button>
+    </div>
+    // Child 컴포넌트가 count를 받고 있지 않으면 버튼을 눌러도 재랜더링 되지 않고  
+    // count 받고 있다면 count 변수가 변할 때 같이 랜더링 된다
+  )
+}
+~~~
+
 ## useContext()
 상위 컴포넌트에서 멀리 떨어진(중첩구조의) 하위 컴포넌트로 데이터를 전송할 때 사용된다 
 아무리 깊숙히 있어도, 모든 컴포넌트가 이 값을 읽을 수 있습니다   
