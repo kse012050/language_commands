@@ -27,6 +27,34 @@ return (
 div{background-image:url('상대경로');}
 ~~~
 
+### lazy  (게으른)
+상황에 따라서 현재 페이지에는 없는 하위 컴포넌트들을 import하는 경우가 있다  
+그런 경우 하위 컴포넌트가 실제로 랜더링 될 때 불러오도록 설정한다
+#### App.js
+~~~js
+import { lazy , Suspense} from 'react';
+// import Home from './routes/Home.jsx'
+// import About from './routes/About.js'
+
+const Home = lazy(()=> import('./routes/Home.jsx'))
+const About = lazy(()=>import ('./routes/About.js'))
+
+function App() {
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Suspense>
+  </Router>
+  // Suspense의 fallback 속성을 이용해서 게을러진 하위 컴포넌트를 불러올 때 로딩 화면을 설정할 수 있다
+}
+~~~
+``lasy``를 사용할 때 ``Suspense``를 꼭 사용해야 한다?  
+그렇게 하지 않으면 ``에러`` 난다  
+[내용출처 react 공식 사이트](https://ko.reactjs.org/docs/code-splitting.html#reactlazy)
+
 
 
 ## component 생성
