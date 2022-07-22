@@ -187,7 +187,7 @@ class componentName extends React.Component{
 }
 ~~~
 
-## useMemo()
+## useMemo()  성능개선
 함수를 최초 랜더링할 때 한번만 실행되게 하는 훅  
 ``useEffect()`` 와 유사하지만 실행 되는 시점이 다르다  
 > useEffect() : HTML이 다 실행하고 실행한다  
@@ -209,7 +209,7 @@ function Component(){
 }
 ~~~
 
-### memo()
+### memo()  성능개선
 컴포넌트가 재랜더링될 때 변화가 없는 하위 컴포넌트도 같이 랜더링 된다  
 변화가 없는 하위 컴포넌트의 랜더링을 막는다
 
@@ -237,6 +237,52 @@ function Component(){
   )
 }
 ~~~
+
+## useTransition() , useDeferredValue() 성능개선
+느린 컴포넌트 성능향상 가능  
+기본적으로 js는 하나의 작업(single-threaded)만 실행이 가능하다 
+``useTransition()``을 사용하면 ``useTransition()``로 감싼 코드는 약간 늦게 실행해준다
+> batch 기능  
+> (리액트18) ajax , setTiemout 내부라면  
+> state1변경 , state2변경 , state3변경 이 연달아 일어난다면 마지막 state 변경할 때 한번에 해주는 기능
+### 사용법
+~~~js
+import { useState , useTransition , useDeferredValue } from 'react';
+
+let a = new Array(10000).fill(0);
+
+export default function Performance(){
+    let [name , setName] = useState('');
+    let [isPending, startTransition] = useTransition();
+    // isPending은 startTransition가 아직 처리 중이면 true 
+
+    let state1 = useDeferredValue(name);
+    // useTransition 과 거의 동일
+    // useDeferredValue 안에 state 값을 넣으면
+    // 그 state가 변경 되었을 때 늦게 처리해준다
+
+    return (
+        <div>
+            <input onChange={(e)=>{
+                startTransition(()=>{ /* 감싼 코드를 약간 늦게 실행 */
+                    setName(e.target.value)
+                })
+            }}></input>
+            {
+              isPending ? '로딩중' : 
+              a.map((a , b)=>{
+                  return <div key={b}>{state1}</div>
+              })
+              // startTransition으로 감싼 코드가 실행 중이면 '로딩중'
+              //      실행이 끝나면 코드 실행해서 보여준다
+              // useDeferredValue를 사용했기 때문에 'name' state1가 state 변수로 변경되었다
+            }
+        </div>
+    )
+}
+~~~
+리액트 18 버전에서 추가 되었지만 , 아직은 사용할 수 없는 테스트 단계이다?  
+[react 공식 사이트 더 정확한 내용은 공식 사이트에서 확인](https://ko.reactjs.org/docs/concurrent-mode-patterns.html)
 
 ## useContext()
 상위 컴포넌트에서 멀리 떨어진(중첩구조의) 하위 컴포넌트로 데이터를 전송할 때 사용된다 
