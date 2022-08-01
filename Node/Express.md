@@ -43,3 +43,17 @@ app.get('/' , function(req , res){
     // http://localhost:위에 입력해 놓은 포트번호/  입력시 index.html를 보여준다
 })
 ~~~
+
+### post()
+넘어온 데이터를 처리할 수 있다
+~~~js
+// app.post('경로' , function(요청 , 응답)){
+//     응답.send('전송완료')
+// })
+
+app.post('/add' , function(요청 , 응답){
+    응답.send('전송완료')
+    console.log(요청.body.userName);
+    // http://localhost:위에 입력해 놓은 포트번호/add 로 넘어온 데이터를 '요청'을 통해 볼 수 있다
+})
+~~~
