@@ -4,23 +4,29 @@
 > npm install mongodb@버전  
 > npm install mongodb@3.6.3
 
-## 사용법
+## 기본 사용법
 ~~~js
 const MongoClient = require('mongodb').MongoClient;
 
 var db;
 MongoClient.connect('URL',function(에러 , client){
     if(에러){console.log(에러)}
-    db = client.db('Collections name')
+    db = client.db('Collections name')      /* DB Url로 접속 후 collections을 db 변수에 넣는다 */
 })
 
 app.get('경로', function(요청 , 응답){
+
+    db.collection('counter').findOne({name : '게시물갯수'},function(에러 , 결과){
+        console.log(결과.totalPost);
+    });
     // .find().toArray  안에 있는 모든 데이터를 꺼낸다
      db.collection('Collections 안 테이블 이름').find().toArray(function(에러 , 결과){
         응답.render('데이터를 받을 파일 경로', { 변수명 : 결과});
     });
 })
 ~~~
+
+### 실 사용 예
 
 ~~~js
 const app = express();
