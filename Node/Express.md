@@ -46,11 +46,26 @@ app.get('/' , function(req , res){
 
 ### post()
 넘어온 데이터를 처리할 수 있다
+~~~html
+    <form action="/add" method="POST">  <!-- action : 데이터 넘길 파일 경로 / method -->
+        <div class="form-group">
+            <label>오늘의 할일</label>
+            <input type="text" class="form-control" name="title">   <!-- name 변수명 -->
+        </div>
+        <div class="form-group">
+            <label>날짜</label>
+            <input type="text" class="form-control" name="date">    <!-- name 변수명 -->
+        </div>
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+    </form>
+~~~
 ~~~js
-// app.post('경로' , function(요청 , 응답)){
-//     응답.send('전송완료')
-// })
+// 기본
+app.post('경로' , function(요청 , 응답)){
+    응답.send('전송완료')
+})
 
+// 실 사용
 app.post('/add' , function(요청 , 응답){
     응답.send('전송완료')
     console.log(요청.body.userName);
