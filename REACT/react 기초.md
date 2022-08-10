@@ -8,10 +8,20 @@ js 파일 최상단에 넣으면 터미널 ``WARNING`` 메세지를 출럭하지
 
 ## 파일 상대 경로로 연결하기
 
-### public
-public폴어의 index.html에서 시작한다고 생각하고 그냥 상대 경로로 연결하면 된다
+### __public__ 폴더에 파일이 있는 경우
+public폴더의 index.html에서 시작한다고 생각하고 그냥 상대 경로로 연결하면 된다
+~~~js
+return (
+  <>
+    <img src={'상대경로'}/>
+  </>
+)
+~~~
 
-### src 폴더에 파일이 있는 경우
+### __src__ 폴더에 파일이 있는 경우
+이미지는 src 폴더에 있는게 좋다  
+src에 있으면 html 뿐만 아니라 css로딩이 가능하지만  
+public에 있으면 css로 가져오는 게 안된다 ( 아직 방법을 찾지 못했다 )
 #### js , jsx
 ~~~js
 import 네이밍 from '상대경로';
@@ -19,7 +29,9 @@ import 네이밍 from '상대경로';
 return (
   <>
     <img src={네이밍}/>
+    <img src={require('상대경로')}/>
   </>
+  // node에서 import -> require로 바꿔주기 때문에 require를 사용할 수 있다?
 )
 ~~~
 #### css
