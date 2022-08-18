@@ -1,4 +1,4 @@
-# insertAdjacentHTML()
+# insertAdjacentHTML()  (insert -> 끼워 넣다 / Adjacent -> 인접한 HTML)
 __insertAdjacentHTML()__ 메서드는 HTML or XML 같은 특정 텍스트를 파싱하고, 특정 위치에 DOM tree 안에 원하는 node들을 추가 한다.  
 이미 사용중인 element 는 다시 파싱하지 않는다. 그러므로 element 안에 존재하는 element를 건드리지 않는다.  
 (innerHtml과는 좀 다름). innerHtml보다 작업이 덜 드므로 빠르다.(덜 빠르다는거야 ,더 빠르다는거야)
