@@ -39,3 +39,5 @@ str.padStart(targetLength [, padString])
 'abc'.padStart(8, "0");     // "00000abc"
 'abc'.padStart(1);          // "abc"
 ~~~
+
+[내용출처 MDN 내가 지정한 길이만큼 내가 원하는 문자로 채워준다](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
