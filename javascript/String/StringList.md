@@ -190,3 +190,56 @@ const maskedNumber = last4Digits.padStart(fullNumber.length, '*');
 console.log(maskedNumber);
 // Expected output: "************5581"
 ~~~
+
+### String.raw()
+``String.raw()``메서드는 템플릿 리터럴의 태그 함수입니다. 이는 Pyhon의 r 접두사 또는 C#의 문자열 리터럴의 @ 접두사와 유사합니다.(그러나 동일 하지는 않습니다. 이 문제에 관해서는 여기 이슈를 참조하십시오.) 이 메서드는 템플릿 리터럴의 윈시 문자열을 가져오는데 사용됩니다. 즉, 대체(예: ${foo})는 처리되지만 이스케이프(예: \n)는 처리되지 않습니다.
+~~~js
+// Windows를 사용하는 변수 생성
+// 백슬래시를 이스케이프 처리하지 않은 경로:
+const filePath = String.raw`C:\Development\profile\aboutme.html`;
+
+console.log(`The file was uploaded from: ${filePath}`);
+// Expected output: "The file was uploaded from: C:\Development\profile\aboutme.html"
+~~~
+
+### String.prototype.repeat()
+``repeat()`` 메서드는 문자열을 주어진 횟수만큼 반복해 붙인 새로운 문자열을 반환합니다.
+~~~js
+'abc'.repeat(-1);   // RangeError
+'abc'.repeat(0);    // ''
+'abc'.repeat(1);    // 'abc'
+'abc'.repeat(2);    // 'abcabc'
+'abc'.repeat(3.5);  // 'abcabcabc' (count will be converted to integer)
+'abc'.repeat(1/0);  // RangeError
+
+({ toString: () => 'abc', repeat: String.prototype.repeat }).repeat(2);
+// 'abcabc' (repeat() is a generic method)
+~~~
+
+### String.prototype.replace()
+해당되는 문자를 원하는 문자로 변경 
+~~~js
+const p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
+
+console.log(p.replace('dog', 'monkey'));
+// Expected output: "The quick brown fox jumps over the lazy monkey. If the dog reacted, was it really lazy?"
+
+
+const regex = /Dog/i;
+console.log(p.replace(regex, 'ferret'));
+// Expected output: "The quick brown fox jumps over the lazy ferret. If the dog reacted, was it really lazy?"
+~~~
+
+### String.prototype.replaceAll()
+모든 해당되는 문자를 원하는 문자로 변경 
+~~~js
+const p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
+
+console.log(p.replaceAll('dog', 'monkey'));
+// Expected output: "The quick brown fox jumps over the lazy monkey. If the monkey reacted, was it really lazy?"
+
+// Global flag required when calling replaceAll with regex
+const regex = /Dog/ig;
+console.log(p.replaceAll(regex, 'ferret'));
+// Expected output: "The quick brown fox jumps over the lazy ferret. If the ferret reacted, was it really lazy?"
+~~~
