@@ -200,6 +200,7 @@ var result = mapped.map(function(el){
 ## 실 사용 예 
 
 ### 오른차순
+#### 숫자
 ~~~js
 const numbers = [15, 52, 23, 11, 9]; 
 
@@ -207,10 +208,21 @@ const numbers = [15, 52, 23, 11, 9];
 numbers.sort((a, b) => a - b); console.log(numbers); // [9, 11, 15, 23, 52] 
 ~~~
 
+#### 문자 (영어 , 한글)
+~~~js
+['a가가', '나나', 'ac', '가가', 'aa'].sort((a, b) => a > b ? 1 : -1);
+~~~
+
 ### 내림차순
+#### 숫자
 ~~~js
 const numbers = [15, 52, 23, 11, 9]; 
 
 // 내림차순 정렬, 원본 배열이 다시 수정 
 numbers.sort((a, b) => b - a); console.log(numbers); // [52, 23, 15, 11, 9]
+~~~
+
+#### 문자 (영어 , 한글)
+~~~js
+['a가가', '나나', 'ac', '가가', 'aa'].sort((a, b) => a > b ? -1 : 1);
 ~~~
