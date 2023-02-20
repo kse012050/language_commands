@@ -135,4 +135,11 @@ console.log(Array.prototype.some.call(arrayLike, (x) => typeof x === "number"));
 // false
 ~~~
 
+## every() , some()의 차이점
+- every()는 모든 요소에 대해서 조건을 충족해야 true 리턴
+- some()은 1개 요소만 충족해도 true를 리턴
+- some의 경우, 어떤 요소가 조건을 충족하면 남아있는 요소들을 체크하지 않고 true 리턴 및 함수 종료. 남은 요소와 관계 없이 true를 리턴하기 때문에 남은 요소들을 확인할 필요 없음.
+- every의 경우, 어떤 요소가 조건을 충족하지 못하면 남은 요소들을 체크하지 않고 false를 리턴. 남은 요소들이 조건을 충족해도 false가 리턴되기 때문에 체크할 필요 없음.
+
+
 [내용출처 MDN 배열 중 1개 요소만 충족해도 true](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
