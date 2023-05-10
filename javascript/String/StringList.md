@@ -243,3 +243,183 @@ const regex = /Dog/ig;
 console.log(p.replaceAll(regex, 'ferret'));
 // Expected output: "The quick brown fox jumps over the lazy ferret. If the ferret reacted, was it really lazy?"
 ~~~
+
+### String.prototype.search()
+search() 메서드는 정규 표현식과 이 String 객체간에 같은 것을 찾기 위한 검색을 실행한다.
+~~~js
+const paragraph = 'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+
+// Any character that is not a word character or whitespace
+const regex = /[^\w\s]/g;
+
+console.log(paragraph.search(regex));
+// Expected output: 43
+
+console.log(paragraph[paragraph.search(regex)]);
+// Expected output: "."
+~~~
+
+### String.prototype.slice()
+slice() 메소드는 문자열의 일부를 추출하면서 새로운 문자열을 반환합니다.
+~~~js
+const str = 'The quick brown fox jumps over the lazy dog.';
+
+console.log(str.slice(31));
+// Expected output: "the lazy dog."
+
+console.log(str.slice(4, 19));
+// Expected output: "quick brown fox"
+
+console.log(str.slice(-4));
+// Expected output: "dog."
+
+console.log(str.slice(-9, -5));
+// Expected output: "lazy"
+~~~
+
+### String.prototype.split()
+split() 메서드는 String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눕니다.
+~~~js
+const str = 'The quick brown fox jumps over the lazy dog.';
+
+const words = str.split(' ');
+console.log(words[3]);
+// Expected output: "fox"
+
+const chars = str.split('');
+console.log(chars[8]);
+// Expected output: "k"
+
+const strCopy = str.split();
+console.log(strCopy);
+// Expected output: Array ["The quick brown fox jumps over the lazy dog."]
+~~~
+
+### String.prototype.startsWith()
+startsWith() 메서드는 어떤 문자열이 특정 문자로 시작하는지 확인하여 결과를 true 혹은 false로 반환합니다.
+~~~js
+const str1 = 'Saturday night plans';
+
+console.log(str1.startsWith('Sat'));
+// Expected output: true
+
+console.log(str1.startsWith('Sat', 3));
+// Expected output: false
+~~~
+
+### String.prototype.substring()
+substring() 메소드는 string 객체의 시작 인덱스로 부터 종료 인덱스 전 까지 문자열의 부분 문자열을 반환합니다.
+~~~js
+const str = 'Mozilla';
+
+console.log(str.substring(1, 3));
+// Expected output: "oz"
+
+console.log(str.substring(2));
+// Expected output: "zilla"
+~~~
+
+### String.prototype.toLocaleLowerCase()
+toLocaleLowerCase() 메서드는 어떤 지역 특정 대/소문자 매핑에 따른 소문자로 변환된 문자열 값을 반환합니다.
+~~~js
+const dotted = 'İstanbul';
+
+console.log(`EN-US: ${dotted.toLocaleLowerCase('en-US')}`);
+// Expected output: "i̇stanbul"
+
+console.log(`TR: ${dotted.toLocaleLowerCase('tr')}`);
+// Expected output: "istanbul"
+~~~
+
+### String.prototype.toLocaleUpperCase()
+toLocaleUpperCase() 메서드는 어떤 지역 특정 대/소문자 매핑에 따른 대문자로 변환된 문자열 값을 반환합니다.
+~~~js
+const city = 'istanbul';
+
+console.log(city.toLocaleUpperCase('en-US'));
+// Expected output: "ISTANBUL"
+
+console.log(city.toLocaleUpperCase('TR'));
+// Expected output: "İSTANBUL"
+~~~
+
+### String.prototype.toLowerCase()
+toLowerCase() 메서드는 문자열을 소문자로 변환해 반환합니다.
+~~~js
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+console.log(sentence.toLowerCase());
+// Expected output: "the quick brown fox jumps over the lazy dog."
+~~~
+
+### String.prototype.toString()
+toString() 메서드는 객체의 문자열 표현을 반환합니다.
+~~~js
+const stringObj = new String('foo');
+
+console.log(stringObj);
+// Expected output: String { "foo" }
+
+console.log(stringObj.toString());
+// Expected output: "foo"
+~~~
+
+### String.prototype.toUpperCase()
+toUpperCase() 메서드는 문자열을 대문자로 변환해 반환합니다.
+~~~js
+const sentence = 'The quick brown fox jumps over the lazy dog.';
+
+console.log(sentence.toUpperCase());
+// Expected output: "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG."
+~~~
+
+### String.prototype.toWellFormed()
+??
+
+### String.prototype.trim()
+이 trim()메서드는 문자열의 양쪽 끝에서 공백을 제거하고 원래 문자열을 수정하지 않고 새 문자열을 반환합니다.
+~~~js
+const greeting = '   Hello world!   ';
+
+console.log(greeting);
+// Expected output: "   Hello world!   ";
+
+console.log(greeting.trim());
+// Expected output: "Hello world!";
+~~~
+
+### String.prototype.trimEnd()
+이 trimEnd()메서드는 문자열 끝에서 공백을 제거하고 원래 문자열을 수정하지 않고 새 문자열을 반환합니다. trimRight()이 메서드의 별칭입니다.
+~~~js
+const greeting = '   Hello world!   ';
+
+console.log(greeting);
+// Expected output: "   Hello world!   ";
+
+console.log(greeting.trimEnd());
+// Expected output: "   Hello world!";
+~~~
+
+### String.prototype.trimStart()
+이 trimStart()메서드는 문자열의 시작 부분에서 공백을 제거하고 원래 문자열을 수정하지 않고 새 문자열을 반환합니다. trimLeft()이 메서드의 별칭입니다.
+~~~js
+const greeting = '   Hello world!   ';
+
+console.log(greeting);
+// Expected output: "   Hello world!   ";
+
+console.log(greeting.trimStart());
+// Expected output: "Hello world!   "
+~~~
+
+### String.prototype.valueOf()
+이 valueOf()메서드는 개체의 기본 값을 반환합니다 String.
+~~~js
+const stringObj = new String('foo');
+
+console.log(stringObj);
+// Expected output: String { "foo" }
+
+console.log(stringObj.valueOf());
+// Expected output: "foo"
+~~~
