@@ -7,6 +7,23 @@
 
 ## Methods
 
+### Array.prototype.at()
+배열에서 해당 값에 해당하는 인텍스의 요소를 반환한다.  
+양수와 __음수(뒤에서 부터)__ 모두 지정 가능 
+~~~js
+const array1 = [5, 12, 8, 130, 44];
+
+let index = 2;
+
+console.log(`Using an index of ${index} the item returned is ${array1.at(index)}`);
+// 예상 출력: "Using an index of 2 the item returned is 8"
+
+index = -2;
+
+console.log(`Using an index of ${index} item returned is ${array1.at(index)}`);
+// 예상 출력: "Using an index of -2 item returned is 130"
+~~~
+
 ### Array.prototype.concat() (concat -> 연결)
 두 개 이상의 배열을 병합합니다
 ~~~js
