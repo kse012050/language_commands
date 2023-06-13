@@ -35,7 +35,21 @@ console.log(array3);
 // 예상 출력 : Array ["a", "b", "c", "d", "e", "f"]
 ~~~
 
-### Array.prototype.copyWithin()    (entries -> 항목)
+### Array.prototype.copyWithin()  (copyWithin -> 내부 복사)
+``copyWithin()`` 메서드는 배열의 일부를 얕게 복사한 뒤, 동일한 배열의 다른 위치에 덮어쓰고 그 배열을 반환합니다. 이 때, 크기(배열의 길이)를 수정하지 않고 반환합니다.
+~~~js
+const array1 = ['a', 'b', 'c', 'd', 'e'];
+
+// 인덱스 3에 있는 요소를 인덱스 0에 복사
+console.log(array1.copyWithin(0, 3, 4));
+// 예상 출력: Array ["d", "b", "c", "d", "e"]
+
+// 인덱스 3부터 끝까지 모든 요소를 인덱스 1에 복사
+console.log(array1.copyWithin(1, 3));
+// 예상 출력: Array ["d", "d", "e", "d", "e"]
+~~~
+
+### Array.prototype.entries()    (entries -> 항목)
 배열의 각 인덱스에 대한 키 / 값 쌍을 포함 하는 새 Array lterator 개체를 반환합니다.
 ~~~js
 const array1 = ['a', 'b', 'c'];
@@ -43,11 +57,12 @@ const array1 = ['a', 'b', 'c'];
 const iterator1 = array1.entries();
 
 console.log(iterator1.next().value);
-// expected output: Array [0, "a"]
+// 예상 출력: Array [0, "a"]
 
 console.log(iterator1.next().value);
-// expected output: Array [1, "b"]
+// 예상 출력: Array [1, "b"]
 ~~~
+
 
 ### Array.prototype.every() (every -> ...마다)
 배열의 모든 요소가 제공된 함수(조건?)에 충족하는지 판단합니다.
@@ -57,7 +72,7 @@ const isBelowThreshold = (currentValue) => currentValue < 40;
 const array1 = [1, 30, 39, 29, 10, 13];
 
 console.log(array1.every(isBelowThreshold));
-// expected output: true
+// 예상 출력: true
 ~~~
 
 ### Array.prototype.fill()  (fill -> 가득 따르다)
@@ -67,14 +82,14 @@ const array1 = [1, 2, 3, 4];
 
 // fill with 0 from position 2 until position 4
 console.log(array1.fill(0, 2, 4));
-// expected output: [1, 2, 0, 0]
+// 예상 출력: [1, 2, 0, 0]
 
 // fill with 5 from position 1
 console.log(array1.fill(5, 1));
-// expected output: [1, 5, 5, 5]
+// 예상 출력: [1, 5, 5, 5]
 
 console.log(array1.fill(6));
-// expected output: [6, 6, 6, 6]
+// 예상 출력: [6, 6, 6, 6]
 ~~~
 
 ### Array.prototype.filter()
@@ -85,7 +100,7 @@ const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
 const result = words.filter(word => word.length > 6);
 
 console.log(result);
-// expected output: Array ["exuberant", "destruction", "present"]
+// 예상 출력: Array ["exuberant", "destruction", "present"]
 ~~~
 
 ### Array.prototype.find()  (find -> 찾기)
@@ -96,7 +111,7 @@ const array1 = [5, 12, 8, 130, 44];
 const found = array1.find(element => element > 10);
 
 console.log(found);
-// expected output: 12
+// 예상 출력: 12
 ~~~
 
 ### Array.prototype.findIndex()
@@ -107,7 +122,7 @@ const array1 = [5, 12, 8, 130, 44];
 const isLargeNumber = (element) => element > 13;
 
 console.log(array1.findIndex(isLargeNumber));
-// expected output: 3
+// 예상 출력: 3
 ~~~
 
 ### Array.prototype.flat()
@@ -116,12 +131,12 @@ console.log(array1.findIndex(isLargeNumber));
 const arr1 = [0, 1, 2, [3, 4]];
 
 console.log(arr1.flat());
-// expected output: [0, 1, 2, 3, 4]
+// 예상 출력: [0, 1, 2, 3, 4]
 
 const arr2 = [0, 1, 2, [[[3, 4]]]];
 
 console.log(arr2.flat(2));
-// expected output: [0, 1, 2, [3, 4]]
+// 예상 출력: [0, 1, 2, [3, 4]]
 ~~~
 
 ### Array.prototype.flatMap()
@@ -134,19 +149,19 @@ const array1 = ['a', 'b', 'c'];
 
 array1.forEach(element => console.log(element));
 
-// expected output: "a"
-// expected output: "b"
-// expected output: "c"
+// 예상 출력: "a"
+// 예상 출력: "b"
+// 예상 출력: "c"
 ~~~
 
 ### Array.from()    ...에서
 유사 배열 객체나 반복 가능한 객체를 복사해 새로운 Array객체를 만듭니다.
 ~~~js
 console.log(Array.from('foo'));
-// expected output: Array ["f", "o", "o"]
+// 예상 출력: Array ["f", "o", "o"]
 
 console.log(Array.from([1, 2, 3], x => x + x));
-// expected output: Array [2, 4, 6]
+// 예상 출력: Array [2, 4, 6]
 ~~~
 
 ### Array.prototype.includes()      포함
@@ -155,15 +170,15 @@ console.log(Array.from([1, 2, 3], x => x + x));
 const array1 = [1, 2, 3];
 
 console.log(array1.includes(2));
-// expected output: true
+// 예상 출력: true
 
 const pets = ['cat', 'dog', 'bat'];
 
 console.log(pets.includes('cat'));
-// expected output: true
+// 예상 출력: true
 
 console.log(pets.includes('at'));
-// expected output: false
+// 예상 출력: false
 ~~~
 
 ### Array.prototype.indexOf()
@@ -173,14 +188,14 @@ console.log(pets.includes('at'));
 const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
 
 console.log(beasts.indexOf('bison'));
-// expected output: 1
+// 예상 출력: 1
 
 // start from index 2
 console.log(beasts.indexOf('bison', 2));
-// expected output: 4
+// 예상 출력: 4
 
 console.log(beasts.indexOf('giraffe'));
-// expected output: -1
+// 예상 출력: -1
 ~~~
 
 ### Array.isArray()
@@ -198,13 +213,13 @@ Array.isArray(undefined);  // false
 const elements = ['Fire', 'Air', 'Water'];
 
 console.log(elements.join());
-// expected output: "Fire,Air,Water"
+// 예상 출력: "Fire,Air,Water"
 
 console.log(elements.join(''));
-// expected output: "FireAirWater"
+// 예상 출력: "FireAirWater"
 
 console.log(elements.join('-'));
-// expected output: "Fire-Air-Water"
+// 예상 출력: "Fire-Air-Water"
 ~~~
 
 ### Array.prototype.keys()
@@ -217,9 +232,9 @@ for (const key of iterator) {
   console.log(key);
 }
 
-// expected output: 0
-// expected output: 1
-// expected output: 2
+// 예상 출력: 0
+// 예상 출력: 1
+// 예상 출력: 2
 ~~~
 
 ### Array.prototype.lastIndexOf()
@@ -244,7 +259,7 @@ const array1 = [1, 4, 9, 16];
 const map1 = array1.map(x => x * 2);
 
 console.log(map1);
-// expected output: Array [2, 8, 18, 32]
+// 예상 출력: Array [2, 8, 18, 32]
 ~~~
 
 ### Array.of()
@@ -264,15 +279,15 @@ Array(1, 2, 3);    // [1, 2, 3]
 const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
 
 console.log(plants.pop());
-// expected output: "tomato"
+// 예상 출력: "tomato"
 
 console.log(plants);
-// expected output: Array ["broccoli", "cauliflower", "cabbage", "kale"]
+// 예상 출력: Array ["broccoli", "cauliflower", "cabbage", "kale"]
 
 plants.pop();
 
 console.log(plants);
-// expected output: Array ["broccoli", "cauliflower", "cabbage"]
+// 예상 출력: Array ["broccoli", "cauliflower", "cabbage"]
 ~~~
 
 ### Array.prototype.push()
@@ -282,13 +297,13 @@ const animals = ['pigs', 'goats', 'sheep'];
 
 const count = animals.push('cows');
 console.log(count);
-// expected output: 4
+// 예상 출력: 4
 console.log(animals);
-// expected output: Array ["pigs", "goats", "sheep", "cows"]
+// 예상 출력: Array ["pigs", "goats", "sheep", "cows"]
 
 animals.push('chickens', 'cats', 'dogs');
 console.log(animals);
-// expected output: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
+// 예상 출력: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
 ~~~
 
 ### Array.prototype.reduce()  아직 잘 모르겠다 따로 공부해야할 것 같다
@@ -299,11 +314,11 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 // 1 + 2 + 3 + 4
 console.log(array1.reduce(reducer));
-// expected output: 10
+// 예상 출력: 10
 
 // 5 + 1 + 2 + 3 + 4
 console.log(array1.reduce(reducer, 5));
-// expected output: 15
+// 예상 출력: 15
 ~~~
 
 ### Array.prototype.reduceRight()   ??
@@ -313,15 +328,15 @@ console.log(array1.reduce(reducer, 5));
 ~~~js
 const array1 = ['one', 'two', 'three'];
 console.log('array1:', array1);
-// expected output: "array1:" Array ["one", "two", "three"]
+// 예상 출력: "array1:" Array ["one", "two", "three"]
 
 const reversed = array1.reverse();
 console.log('reversed:', reversed);
-// expected output: "reversed:" Array ["three", "two", "one"]
+// 예상 출력: "reversed:" Array ["three", "two", "one"]
 
 // 주의 : reverse는 파괴적입니다. 원래 배열을 변경합니다.
 console.log('array1:', array1);
-// expected output: "array1:" Array ["three", "two", "one"]
+// 예상 출력: "array1:" Array ["three", "two", "one"]
 ~~~
 
 ### Array.prototype.shift()
@@ -333,10 +348,10 @@ const array1 = [1, 2, 3];
 const firstElement = array1.shift();
 
 console.log(array1);
-// expected output: Array [2, 3]
+// 예상 출력: Array [2, 3]
 
 console.log(firstElement);
-// expected output: 1
+// 예상 출력: 1
 ~~~
 
 ### Array.prototype.slice()   ( slice -> 일부분)
@@ -346,13 +361,13 @@ console.log(firstElement);
 const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
 
 console.log(animals.slice(2));
-// expected output: Array ["camel", "duck", "elephant"]
+// 예상 출력: Array ["camel", "duck", "elephant"]
 
 console.log(animals.slice(2, 4));
-// expected output: Array ["camel", "duck"]
+// 예상 출력: Array ["camel", "duck"]
 
 console.log(animals.slice(1, 5));
-// expected output: Array ["bison", "camel", "duck", "elephant"]
+// 예상 출력: Array ["bison", "camel", "duck", "elephant"]
 ~~~
 
 ### Array.prototype.some()    ( some-> 약간 )
@@ -365,7 +380,7 @@ const array = [1, 2, 3, 4, 5];
 const even = (element) => element % 2 === 0;
 
 console.log(array.some(even));
-// expected output: true
+// 예상 출력: true
 ~~~
 다음 예제는 배열 내 요소 중 하나라도 10보다 큰지 판별합니다.
 ~~~js
@@ -383,12 +398,12 @@ function isBiggerThan10(element, index, array) {
 const months = ['March', 'Jan', 'Feb', 'Dec'];
 months.sort();
 console.log(months);
-// expected output: Array ["Dec", "Feb", "Jan", "March"]
+// 예상 출력: Array ["Dec", "Feb", "Jan", "March"]
 
 const array1 = [1, 30, 4, 21, 100000];
 array1.sort();
 console.log(array1);
-// expected output: Array [1, 100000, 21, 30, 4]
+// 예상 출력: Array [1, 100000, 21, 30, 4]
 ~~~
 
 ### Array.prototype.splice()  ( splice-> 접착 )
@@ -398,12 +413,12 @@ const months = ['Jan', 'March', 'April', 'June'];
 months.splice(1, 0, 'Feb');
 // 인덱스 1에 삽입
 console.log(months);
-// expected output: Array ["Jan", "Feb", "March", "April", "June"]
+// 예상 출력: Array ["Jan", "Feb", "March", "April", "June"]
 
 months.splice(4, 1, 'May');
 // 인덱스 4에서 요소 1 개를 대체합니다.
 console.log(months);
-// expected output: Array ["Jan", "Feb", "March", "April", "May"]
+// 예상 출력: Array ["Jan", "Feb", "March", "April", "May"]
 ~~~
 
 ### Array.prototype.toLocaleString()
@@ -415,7 +430,7 @@ console.log(months);
 const array1 = [1, 2, 'a', '1a'];
 
 console.log(array1.toString());
-// expected output: "1,2,a,1a"
+// 예상 출력: "1,2,a,1a"
 ~~~
 
 ### Array.prototype.unshift()
@@ -424,10 +439,10 @@ console.log(array1.toString());
 const array1 = [1, 2, 3];
 
 console.log(array1.unshift(4, 5));
-// expected output: 5
+// 예상 출력: 5
 
 console.log(array1);
-// expected output: Array [4, 5, 1, 2, 3]
+// 예상 출력: Array [4, 5, 1, 2, 3]
 ~~~
 
 ### Array.prototype.values()
