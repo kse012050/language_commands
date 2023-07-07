@@ -29,4 +29,26 @@ const objectURL = URL.createObjectURL(object)
 
 > 경고: 중요: 아직 미디어 요소에 createObjectURL()을 사용해 스트림을 부착하고 있다면, srcObject에 MediaStream을 직접 설정하도록 코드를 수정해야 합니다.
 
+## 사용 예
+### input file로 이미지 보여주기 react
+~~~html
+ <section>
+    {file && <img src={URL.createObjectURL(file)} alt='local file'/>}
+    <form onSubmit={handleSubmit}>
+        <input type="file" accept='image/*' name="file" required onChange={handleChange} />
+    </form>
+</section>
+~~~
+
+~~~js
+const [file, setFile] = useState();
+const handleChange = (e) => {
+    const { files } = e.target;
+    if(name === 'file'){
+        setFile(files && files[0]);
+        return;
+    }
+}
+~~~
+
 [내용출처 MDN](https://developer.mozilla.org/ko/docs/Web/API/URL/createObjectURL_static)
