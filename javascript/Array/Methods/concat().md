@@ -67,4 +67,4 @@ alpha.concat(1, [2, 3]);
 // 결과: ['a', 'b', 'c', 1, 2, 3]
 ~~~
 
-[내용출처 MDN 배열 연결하기]
+[내용출처 MDN 배열 연결하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
