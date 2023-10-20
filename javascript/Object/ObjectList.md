@@ -14,9 +14,9 @@ o.constructor === Object; // true
 
 ## 매서드
 
-### Object.assign() (assign 양수인)
+### Object.assign() <span style="font-size:14px">(assign 양수인)</span>
 ``source`` 를 복사해 ``target``에 붙여넣는다  
-단, 동일한 ``key`` 값이 있으면 ``value``를 덮어 씌운다
+<span style="font-size:14px">단, 동일한 ``key`` 값이 있으면 ``value``를 덮어 씌운다</span>
 ~~~js
 const target = { a: 1, b: 2 };
 const source = { b: 4, c: 5 };
