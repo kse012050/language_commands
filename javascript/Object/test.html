@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        const target = { a: 1, b: 2 };
-        const source = { b: 4, c: 5 };
+        const object1 = {
+            a: 'somestring',
+            b: 42,
+        };
 
-        const returnedTarget = Object.assign(target, source);
+      /*   for (const [key, value] of Object.entries(object1)) {
+            console.log(`${key}: ${value}`);
+        } */
 
-        console.log(target);
-        // Expected output: Object { a: 1, b: 4, c: 5 }
-        console.log(source);
-        console.log(returnedTarget);
-        console.log(returnedTarget === target);
-        // Expected output: true
-
-        let test = Object.create(null);
-        console.log(test);
+        Object.entries(object1).map(([key, value])=>{
+            console.log(`${key}: ${value}`);
+        })
+        Object.keys(object1).map((key)=>{
+            console.log(key);
+        })
+        Object.values(object1).map((value)=>{
+            console.log(value);
+        })
     </script>
 </head>
 <body>
