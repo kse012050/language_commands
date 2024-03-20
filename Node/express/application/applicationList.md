@@ -25,9 +25,15 @@
 app.get(path, callback [, callback ...])
 ~~~
 
-### app.get()
-
 ### app.listen()
+지정된 호스트 및 포트에서 연결을 바인딩하고 수신합니다.
+~~~js
+app.listen([port[, host[, backlog]]][, callback])
+
+var express = require('express')
+var app = express()
+app.listen(3000)
+~~~
 
 ### app.METHOD()
 
