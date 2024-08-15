@@ -15,7 +15,7 @@ console.log(sum(2, 6));
 new Function ([arg1[, arg2[, ...argN]],] functionBody)
 ~~~
 
-### 매개 변수
+### 매개 변수   
 
 #### arg1, arg2, ... argN
 형식 인수 이름으로 사용할 이름. 각 이름은 유효한 JavaScript 식별자거나, 쉼표로 구분한 유효한 식별자 목록이어야 합니다. 즉, "``x``", "``theValue``", "``x,theValue``"등의 값을 사용할 수 있습니다.
