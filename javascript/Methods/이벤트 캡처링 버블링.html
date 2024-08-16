@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{width: 400px; aspect-ratio: 1; background-color: lightblue;}
+        div ul{padding: 0; margin: 0; width: 300px; aspect-ratio: 1; background-color: dodgerblue;}
+        div ul li{width: 200px; aspect-ratio: 1; background-color: blue;}
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+
+    <input type="text" value="Select this text" id="myInput">
+
+    <div id="draggable" draggable="true">Drag me</div>
+
+    <button id="myButton">Click me</button>
+
+    <script>
+        document.querySelector('div').addEventListener('click',function(e){
+            console.log('div 태그 버블링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('div 태그 버블링 이벤트 fin');
+        })
+        document.querySelector('ul').addEventListener('click',function(e){
+            e.stopPropagation()
+            console.log('ul 태그 버블링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('ul 태그 버블링 이벤트 fin');
+        })
+        document.querySelector('li').addEventListener('click',function(e){
+            console.log('li 태그 버블링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('li 태그 버블링 이벤트 fin');
+        })
+
+        
+        document.querySelector('div').addEventListener('click',function(e){
+            console.log('div 태그 캡처링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('div 태그 캡처링 이벤트 fin');
+        }, true)
+        document.querySelector('ul').addEventListener('click',function(e){
+            e.stopPropagation()
+            console.log('ul 태그 캡처링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('ul 태그 캡처링 이벤트 fin');
+        }, true)
+        document.querySelector('li').addEventListener('click',function(e){
+            console.log('li 태그 캡처링 이벤트');
+            console.log(e.target);
+            console.log(e.currentTarget);
+            console.log('li 태그 캡처링 이벤트 fin');
+        }, true)
+
+
+        document.getElementById('myInput').addEventListener('keydown', function(event) {
+            event.preventDefault(); // 키의 기본 동작 방지
+            console.log('key prevented');
+        });
+
+        document.getElementById('draggable').addEventListener('dragstart', function(event) {
+            event.preventDefault(); // 드래그의 기본 동작 방지
+            console.log('Drag prevented');
+        });
+
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // 컨텍스트 메뉴의 기본 동작 방지
+            console.log('Context menu prevented');
+        });
+
+
+
+        // 첫 번째 핸들러
+        document.getElementById('myButton').addEventListener('click', function(event) {
+            console.log('First event handler');
+            // event.stopImmediatePropagation(); // 여기서 이벤트의 전파를 중단하고 다른 핸들러를 막음
+        });
+
+        // 두 번째 핸들러
+        document.getElementById('myButton').addEventListener('click', function() {
+            console.log('Second event handler');
+        });
+
+        // 세 번째 핸들러
+        document.getElementById('myButton').addEventListener('click', function() {
+            console.log('Third event handler');
+        });
+    </script>
+</body>
+</html>
