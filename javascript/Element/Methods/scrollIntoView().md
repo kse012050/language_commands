@@ -1,3 +1,6 @@
+기본방식 ``scrollTo()``는 스크롤을 가지고 있는 DOM를 이용해서 스크롤 위치를 조정 했다면  
+``scrollIntoView()``는 보여져야할 DOM을 이용해서 스크롤을 움직이는 것 같다
+
 # scrollIntoView()
 Element 인터페이스의 ``scrollIntoView()`` 메서드는 ``scrollIntoView()``가 호출된 요소가 사용자에게 표시되도록 요소의 상위 컨테이너를 스크롤합니다.  
   
