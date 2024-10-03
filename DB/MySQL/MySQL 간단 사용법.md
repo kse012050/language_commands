@@ -38,7 +38,7 @@ Structured Query Language - 구조화된 쿼리 언어
 데이터명과 VALUES 값을 여러게 넣을 떄는 ``,`` 로 구분한다  
 데이터 명 항목은 생략 가능 ( 데이터값도 생략, 즉 id 값 같이 자동으로 계산되는 값 제외 )  
 테이터 값 ``NOW()``를 하면 현재 시간을 넣어준다
-~~~database
+~~~dir
 INSERT INTO 테이블이름 ( 데이터명1, 데이터명2 ) VALUES( 데이터값1, 데이터값2 );
 ~~~
 <p style="color:red;">This text will be red.</p>
