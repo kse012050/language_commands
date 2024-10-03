@@ -41,7 +41,6 @@ Structured Query Language - 구조화된 쿼리 언어
 ~~~dir
 INSERT INTO 테이블이름 ( 데이터명1, 데이터명2 ) VALUES( 데이터값1, 데이터값2 );
 ~~~
-<p style="color:red;">This text will be red.</p>
 
 ### SELECT 데이터명 FROM 테이블이름;
 ``테이블이름`` 테이블에 데이터명 값들을 보여준다  
