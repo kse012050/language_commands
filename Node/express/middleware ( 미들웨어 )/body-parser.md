@@ -3,6 +3,9 @@
 > __데이터 파싱__: 비구조화된 데이터 소스에서 관련 정보를 추출하고 쉽게 분석할 수 있는 구조화된 형식으로 변환하는 과정  
   
 ## 사용법
+### 설치방법
+> $ npm install body-parser
+
 ### ``body-parser``을 사용했을 때
 ~~~js
 var express = require('express')
