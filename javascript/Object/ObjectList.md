@@ -93,3 +93,17 @@ Object.values(object1).map((value)=>{
 // 42
 // false
 ~~~
+
+### Object.fromEntries
+``Object.fromEntries`` 메서드는 키값 쌍의 목록을 객체로 바꿉니다
+~~~js
+const entries = new Map([
+  ['foo', 'bar'],
+  ['baz', 42],
+]);
+
+const obj = Object.fromEntries(entries);
+
+console.log(obj);
+// 예상 출력: Object { foo: "bar", baz: 42 }
+~~~
