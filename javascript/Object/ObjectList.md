@@ -107,3 +107,22 @@ const obj = Object.fromEntries(entries);
 console.log(obj);
 // 예상 출력: Object { foo: "bar", baz: 42 }
 ~~~
+
+### Object.hasOwn   
+명시된 객체에 자체 속성으로 지정된 속성이 있는 경우 ``Object.hasOwn()`` 정적 메서드는 ``true``를 반환합니다. 속성이 상속되었거나 존재하지 않으면 이 메서드는 ``false``를 반환합니다.  
+``Object``에 해당 ``키`` 값이 있으면 ``true`` 없으면 ``false``  
+> Object.prototype.hasOwnProperty(): 대체재 ``hasOwn``을 ``지원하지 않는 브라우저만 사용``
+~~~js
+const object1 = {
+  prop: 'exists',
+};
+
+console.log(Object.hasOwn(object1, 'prop'));
+// 기대 출력: true
+
+console.log(Object.hasOwn(object1, 'toString'));
+// 기대 출력: false
+
+console.log(Object.hasOwn(object1, 'undeclaredPropertyValue'));
+// 기대 출력: false
+~~~
