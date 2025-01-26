@@ -363,4 +363,14 @@ if (!Array.prototype.mapUsingReduce) {
 ); // [5, 7, , 10]
 ~~~
 
+### 데이터 내용 변경 ( 데이터 형식 [{},{}])
+~~~js
+data.map((item) =>
+    Object.entries(item).reduce((acc, [key, value]) => {
+        acc[key] = key === "image" && value ? `http://${hostName}:8001${value}` : value;
+        return acc;
+    }, {})
+)
+~~~
+
 [내용출처 MDN reduce() 배열.reduce(function(누적값,현재값,인덱스,array){},초기값) ](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
