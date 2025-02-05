@@ -319,4 +319,7 @@ WebGLRenderLists에 대한 사용자 정의 투명 정렬 함수를 설정합니
 (x, y)에서 (x + width, y + height)까지 렌더링할 뷰포트를 설정합니다.  
 (x, y)는 영역의 왼쪽 아래 모서리입니다.
 
+## Source
+[src/renderers/WebGLRenderer.js](https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js)
+
 [내용출처 threejs 공식 사이트](https://threejs.org/docs/#api/en/renderers/WebGLRenderer)
