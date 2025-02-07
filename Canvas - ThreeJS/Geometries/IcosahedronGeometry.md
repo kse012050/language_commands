@@ -1,6 +1,8 @@
 # IcosahedronGeometry ( 이십면체기하학 )
 이십면체 기하학을 생성하는 클래스입니다.
 
+[예시 적용화면 공식 사이트 있음!! 꼭 확인!!](https://threejs.org/docs/#api/en/geometries/IcosahedronGeometry) 
+
 ## Constructor
 ### IcosahedronGeometry(radius : Float, detail : Integer)
 radius — 기본값은 ``1``입니다.  
