@@ -79,4 +79,4 @@ light.target = targetObject;
 ## Source
 [src/lights/DirectionalLight.js](https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js)
 
-[내용출처 threejs 공식 사이트 DirectionalLight ( 방향성 조명 )](https://threejs.org/docs/#api/en/objects/Mesh)
+[내용출처 threejs 공식 사이트 DirectionalLight ( 방향성 조명 )](https://threejs.org/docs/#api/en/lights/DirectionalLight)
