@@ -63,3 +63,41 @@ endAngle -- 라디안 단위의 종료 각도
 clockwork -- 호를 시계 방향으로 스윕합니다. 기본값은 ``false``입니다.  
   
 ``.currentPoint``를 기준으로 배치된 ``EllipseCurve``를 경로에 추가합니다.
+
+### .bezierCurveTo ( cp1X : Float, cp1Y : Float, cp2X : Float, cp2Y : Float, x : Float, y : Float ) : this
+이것은 ``.currentPoint``에서 (cp1X, cp1Y) 및 (cp2X, cp2Y)를 제어점으로 사용하여 베지어 곡선을 만들고 ``.currentPoint``를 x 및 y로 업데이트합니다.  
+  
+### .ellipse ( x : Float, y : Float, xRadius : Float, yRadius : Float, startAngle : Float, endAngle : Float, clockwork : Boolean, rotation : Float ) : this
+x, y -- 마지막 호출에서 오프셋된 타원의 중심입니다.  
+xRadius -- x축에서 타원의 반지름입니다.  
+yRadius -- y축에서 타원의 반지름입니다.  
+startAngle -- 라디안 단위의 시작 각도.  
+endAngle -- 라디안 단위의 종료 각도.  
+clockwork -- 타원을 시계 방향으로 스윕합니다. 기본값은 ``false``입니다.  
+rotation -- 양의 X축에서 반시계 방향으로 타원의 회전 각도(라디안). 선택 사항이며 기본값은 ``0``입니다.  
+  
+``.currentPoint``를 기준으로 배치된 경로에 ``EllipseCurve``를 추가합니다.  
+  
+### .lineTo ( x : Float, y : Float ) : this
+``.currentPoint``에서 x, y로 LineCurve를 경로에 연결합니다.
+
+### .moveTo ( x : Float, y : Float ) : this
+``.currentPoint``를 x, y로 이동합니다.  
+  
+### .quadraticCurveTo(cpX: Float, cpY: Float, x: Float, y: Float) : this
+cpX와 cpY를 제어점으로 사용하여 ``.currentPoint``에서 2차 곡선을 만들고 ``.currentPoint``를 x와 y로 업데이트합니다.  
+  
+### .setFromPoints(vector2s: Array) : this
+points -- ``Vector2``의 배열입니다.  
+  
+Points는 ``LineCurves``로 ``curves`` 배열에 추가됩니다.  
+  
+### .splineThru(points: Array) : this
+points - ``Vector2``의 배열입니다.  
+  
+경로에 새 ``SplineCurve``를 연결합니다.
+
+## Source
+[src/extras/core/Path.js](https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js)
+
+[내용출처 threejs 공식 사이트 Path ( 길 )](https://threejs.org/docs/#api/en/extras/core/Path)
