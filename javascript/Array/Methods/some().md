@@ -135,9 +135,21 @@ console.log(Array.prototype.some.call(arrayLike, (x) => typeof x === "number"));
 // false
 ~~~
 
+## 실사용
+### input 하나라도 true라면 반복을 멈추고 focus
+~~~js
+return Object.entries(obj).some(([key, value]) => {
+    if (!value && document.querySelector(`[name="${key}"]`)) {
+        document.querySelector(`[name="${key}"]`).focus()
+        return true; // 반복을 멈추기 위해 true를 반환
+    }
+    return false;
+});
+~~~
+
 ## every() , some()의 차이점
-- every()는 모든 요소에 대해서 조건을 충족해야 true 리턴
-- some()은 1개 요소만 충족해도 true를 리턴
+- every()는 ``모든 요소``에 대해서 조건을 충족해야 ``true`` 리턴
+- some()은 ``1개 요소만 충족``해도 ``true``를 리턴
 - some의 경우, 어떤 요소가 조건을 충족하면 남아있는 요소들을 체크하지 않고 true 리턴 및 함수 종료. 남은 요소와 관계 없이 true를 리턴하기 때문에 남은 요소들을 확인할 필요 없음.
 - every의 경우, 어떤 요소가 조건을 충족하지 못하면 남은 요소들을 체크하지 않고 false를 리턴. 남은 요소들이 조건을 충족해도 false가 리턴되기 때문에 체크할 필요 없음.
 
