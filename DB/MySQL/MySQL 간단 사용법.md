@@ -85,7 +85,18 @@ WHERE을 작성하지 않으면 모든 데이터가 지워지기 때문에 WHERE
 > SELECT 테이블명1.id AS 테이블명1_id FROM 테이블명1 LEFT JOIN 테이블명2 ON 테이블명1.데이터명 = 테이블명2.데이터명;
 
 
-## 트리거 확인
+## CHECK
+### SHOW CREATE TABLE 테이블명;
+CHECK 확인
+
+### ALTER TABLE 테이블명 ADD CONSTRAINT 체크명 CHECK ( 조건 );
+CHECK 추가
+
+### ALTER TABLE 테이블명 DROP CONSTRAINT 체크명;
+CHECK 제거
+
+
+## 트리거
 ### SHOW TRIGGERS WHERE `Table` = '테이블명';
 트리거 확인, 테이블명에 ``''`` 있어야 한다
 
