@@ -125,22 +125,52 @@ console.log(array1.findIndex(isLargeNumber));
 // 예상 출력: 3
 ~~~
 
+### Array.prototype.findLast()
+배열을 __역순__ 으로 순회하며 제공된 테스트 함수를 만족하는 첫 번째 요소의 값을 반환합니다.
+~~~js
+const array1 = [5, 12, 50, 130, 44];
+
+const found = array1.findLast((element) => element > 45);
+
+console.log(found);
+// 예상 출력: 130
+~~~
+
+### Array.prototype.findLastIndex()
+열을 __역순__ 으로 순회하며 주어진 판별 함수를 만족하는 배열의 첫번째 요소의 인덱스를 반환합니다.  
+만족하는 요소가 없으면 ``-1을 반환``합니다.
+
 ### Array.prototype.flat()
-배열안의 배열을 풀어줍니다?
+모든 하위 배열 요소가 지정된 깊이까지 재귀적으로 연결된 새 배열을 생성합니다.  
+배열 안의 배열을 풀어준다.
 ~~~js
 const arr1 = [0, 1, 2, [3, 4]];
 
 console.log(arr1.flat());
-// 예상 출력: [0, 1, 2, 3, 4]
+// 예상 출력: Array [0, 1, 2, 3, 4]
 
-const arr2 = [0, 1, 2, [[[3, 4]]]];
+const arr2 = [0, 1, [2, [3, [4, 5]]]];
+
+console.log(arr2.flat());
+// 예상 출력: Array [0, 1, 2, Array [3, Array [4, 5]]]
 
 console.log(arr2.flat(2));
-// 예상 출력: [0, 1, 2, [3, 4]]
+// 예상 출력: Array [0, 1, 2, 3, Array [4, 5]]
+
+console.log(arr2.flat(Infinity));
+// 예상 출력: Array [0, 1, 2, 3, 4, 5]
 ~~~
 
 ### Array.prototype.flatMap()
-??
+``map()``과 ``flat()``를 한번에~
+~~~js
+const arr1 = [1, 2, 1];
+
+const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1));
+
+console.log(result);
+// 예상 출력: Array [1, 2, 2, 1]
+~~~
 
 ### Array.prototype.forEach()
 배열 요소에 대해 제공된 함수를 한 번씩 실행합니다.
@@ -306,7 +336,7 @@ console.log(animals);
 // 예상 출력: Array ["pigs", "goats", "sheep", "cows", "chickens", "cats", "dogs"]
 ~~~
 
-### Array.prototype.reduce()  아직 잘 모르겠다 따로 공부해야할 것 같다
+### Array.prototype.reduce()
 배열의 각 요소에 대해 주어진 reducer 함수를 실행하고, 하나의 결과값을 반환합니다.
 ~~~js
 const array1 = [1, 2, 3, 4];
@@ -321,7 +351,22 @@ console.log(array1.reduce(reducer, 5));
 // 예상 출력: 15
 ~~~
 
-### Array.prototype.reduceRight()   ??
+### Array.prototype.reduceRight()
+``reducer``의 역순으로 함수를 실행한다.
+~~~js
+const array1 = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+];
+
+const result = array1.reduceRight((accumulator, currentValue) =>
+  accumulator.concat(currentValue),
+);
+
+console.log(result);
+// 예상 출력: Array [4, 5, 2, 3, 0, 1]
+~~~
 
 ### Array.prototype.reverse()   ( reverse -> 역전 )
 배열의 순서를 반전합니다. 첫번째 요소는 마지막요소로, 마지막요소는 첫번째 요소로
@@ -424,6 +469,16 @@ console.log(months);
 ### Array.prototype.toLocaleString()
 ??
 
+### Array.prototype.toReversed()
+``reverse()``에 대응되는 __복사__ 메서드입니다.  
+``reverse()``은 원본, ``toReversed()`` 복사
+
+### Array.prototype.toSorted()
+``sort()``에 대응되는 __복사__ 메서드입니다.
+
+### Array.prototype.toSpliced()
+``aplice()``에 대응되는 __복사__ 메서드입니다.
+
 ### Array.prototype.toString()
 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다.
 ~~~js
@@ -447,5 +502,7 @@ console.log(array1);
 
 ### Array.prototype.values()
 배열의 각 인덱스에 대한 값을 가지는 새로운 Array Iterator 객체를 반환합니다.
+
+### Array.prototype.with()
 
 [내용출처 MDN Array의 Methods를 간단하게 정리 중이다](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
