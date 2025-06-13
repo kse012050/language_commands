@@ -23,6 +23,12 @@ Structured Query Language - 구조화된 쿼리 언어
 
 ### CREATE TABLE 이름( 옵션들 - 행, PRIMARY KEY(행 이름) );
 사용자가 지정한 ``이름``으로 테이블을 만든다 ( 옵션은 나중에 정리 )
+~~~dir
+CREATE TABLE 테이블명 (
+    필드명1 옵션,
+    필드명2 옵션,
+)
+~~~
 
 ### RENAME TABLE 테이블명 TO 변경할 테이블명;
 테이블의 이름을 변경한다
