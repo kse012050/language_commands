@@ -25,8 +25,9 @@ Structured Query Language - 구조화된 쿼리 언어
 사용자가 지정한 ``이름``으로 테이블을 만든다 ( 옵션은 나중에 정리 )
 ~~~dir
 CREATE TABLE 테이블명 (
-    필드명1 옵션,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     필드명2 옵션,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 ~~~
 
