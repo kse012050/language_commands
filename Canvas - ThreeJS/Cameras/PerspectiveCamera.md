@@ -20,8 +20,8 @@ scene.add( camera );
 ### PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
 fov — 카메라 프러스텀 수직 시야.  
 aspect — 카메라 프러스텀 종횡비.  
-near — 카메라 프러스텀 근처 평면.  
-far — 카메라 프러스텀 먼 평면.  
+near — 카메라 프러스텀 근처 평면.( 카메라가 얼마나 가까울 때 안보이게 할지 정한다 )  
+far — 카메라 프러스텀 먼 평면.( 카메라가 얼마나 멀어졌을 때 안보이게 할지 정한다 )  
  
 이것들이 합쳐져서 카메라의 시야 프러스텀을 정의합니다.
 
