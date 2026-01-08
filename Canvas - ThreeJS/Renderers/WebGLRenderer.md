@@ -282,7 +282,8 @@ requestAnimationFrame 대신 사용할 수 있는 내장 함수입니다. WebXR 
 지우기 색상과 불투명도를 설정합니다.
 
 ### .setPixelRatio(value: number): undefined
-장치 픽셀 비율을 설정합니다. 이는 일반적으로 HiDPI 장치에서 출력 캔버스가 흐릿해지는 것을 방지하기 위해 사용됩니다.
+장치 픽셀 비율을 설정합니다. 이는 일반적으로 HiDPI 장치에서 출력 캔버스가 흐릿해지는 것을 방지하기 위해 사용됩니다.  
+큰 이미지를 줄여서 해상도를 좋게 만드는 것과 같은 효과 ( window.devicePixelRatio 속성 사용 )
 
 ### .setRenderTarget(renderTarget: WebGLRenderTarget, activeCubeFace: Integer, activeMipmapLevel: Integer): undefined
 renderTarget -- 활성화해야 하는 renderTarget입니다. null이 주어지면 캔버스가 대신 활성 렌더 대상으로 설정됩니다.  
