@@ -124,4 +124,4 @@
 ## Source
 [src/materials/MeshLambertMaterial.js](https://github.com/mrdoob/three.js/blob/master/src/materials/MeshLambertMaterial.js)
 
-[내용출처 threejs 공식 사이트 MeshLambertMaterial ( 메시 램버트 소재 )](https://threejs.org/docs/#api/en/materials/MeshLambertMaterial)
+[내용출처 threejs 공식 사이트 MeshLambertMaterial, MeshPhongMaterial 차이점 하이라이트와 반사광 여부](https://threejs.org/docs/#api/en/materials/MeshLambertMaterial)
