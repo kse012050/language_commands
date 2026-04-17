@@ -6,7 +6,7 @@
 자세한 내용은 `SpotLightShadow`를 참고하세요.
 
 ## Code Example
-
+~~~js
     // 텍스처로 조절되는 흰색 스포트라이트
     const spotLight = new THREE.SpotLight( 0xffffff );
     spotLight.position.set( 100, 1000, 100 );
@@ -19,7 +19,7 @@
     spotLight.shadow.camera.near = 500;
     spotLight.shadow.camera.far = 4000;
     spotLight.shadow.camera.fov = 30;
-
+~~~
 ## Constructor
 ### SpotLight( color : number | Color | string, intensity : number, distance : number, angle : number, penumbra : number, decay : number )
 SpotLight를 생성합니다.
