@@ -22,149 +22,227 @@ var ctx = canvas.getContext(contextType, contextAttributes);
 > __노트 :__ 식별자 ``"experimental-webgl"`` 은 WebGL의 새로운 구현에서 사용됩니다. 이러한 구현은 테스트 스위트 적합성을 아직 만족하지 못하며, 플랫폼 상의 그래픽 드라이버도 아직 불안정합니다. [Khronos Group](https://www.khronos.org/) 은 특정 [적합성 규칙](https://www.khronos.org/registry/webgl/sdk/tests/CONFORMANCE_RULES.txt) 에 따라 WebGL 구현을 인증합니다.
 
 #### contextAttributes
-랜더링 컨텍스트를 생성할 떄 몇 가지 컨텍스트 속성을 사용할 수 있습니다. 예를 들면
-~~~js
-const gl = canvas.getContext('webgl',{
-    antialias : false,
-    depth: false
-})
-~~~
 
-#### 2D 컨텍스트 속성
-
-- __``alpha``__ : `false`이면 Canvas를 항상 불투명한 것으로 처리합니다. 투명한 Canvas가 필요 없다면 합성 작업을 줄이는 데 도움이 될 수 있습니다.
-- __``willReadFrequently``__ : `getImageData()`처럼 픽셀을 자주 읽을 예정임을 브라우저에 알리는 힌트입니다.
-
-#### WebGL 컨텍스트 속성
+`contextAttributes`는 WebGL 컨텍스트를 생성할 때 필요한 버퍼와 동작 방식을 요청하는 선택 설정입니다.
 
 ```js
 const gl = canvas.getContext("webgl", {
-  alpha: false,
-  antialias: false,
-  depth: false,
+  alpha: true,
+  antialias: true,
+  depth: true,
   stencil: false,
+  premultipliedAlpha: true,
   preserveDrawingBuffer: false,
-  powerPreference: "high-performance",
+  powerPreference: "default",
+  failIfMajorPerformanceCaveat: false,
+  desynchronized: false,
+  xrCompatible: false,
 });
 ```
 
-이 옵션들은 WebGL Canvas를 만들 때 브라우저에 요청하는 초기 설정입니다. 필요한 버퍼와 기능만 활성화하면 메모리와 처리 비용을 줄이는 데 도움이 됩니다.
+WebGL과 WebGL 2는 동일한 컨텍스트 옵션을 사용합니다.
 
-##### 어디에서 사용할 수 있는가?
-
-아래 표는 같은 옵션을 `getContext()`의 두 번째 인자로 직접 전달할 수 있는지와 다른 API에서의 대응 방법을 보여줍니다.
-
-| 옵션 | Canvas 2D | `bitmaprenderer` | WebGL·WebGL 2 | WebGPU에서의 대응 방법 |
-| --- | --- | --- | --- | --- |
-| `alpha` | 사용 가능 | 사용 가능 | 사용 가능 | `context.configure()`의 `alphaMode` |
-| `antialias` | 직접 설정 불가 | 해당 없음 | 사용 가능 | 렌더 파이프라인의 `multisample.count` |
-| `depth` | 해당 없음 | 해당 없음 | 사용 가능 | 깊이 텍스처와 `depthStencil` 설정 |
-| `stencil` | 해당 없음 | 해당 없음 | 사용 가능 | 스텐실 형식 텍스처와 `depthStencil` 설정 |
-| `preserveDrawingBuffer` | 해당 없음 | 해당 없음 | 사용 가능 | 동일한 옵션 없음. 필요한 결과를 별도 텍스처에 복사 |
-| `powerPreference` | 해당 없음 | 해당 없음 | 사용 가능 | `navigator.gpu.requestAdapter()`에서 설정 |
-
-여섯 값을 현재 형태로 한꺼번에 전달하는 대상은 WebGL과 WebGL 2입니다. 다른 API에서도 같은 개념을 사용할 수 있지만 이름이나 설정 위치가 다를 수 있습니다.
-
-##### `alpha: false`
-
-Canvas 배경의 투명도를 사용하지 않겠다는 뜻입니다.
-
-```text
-alpha: true
-Canvas가 투명할 수 있고 뒤쪽 HTML이 보일 수 있음
-
-alpha: false
-Canvas가 항상 불투명하고 뒤쪽 HTML이 보이지 않음
+```js
+canvas.getContext("webgl", contextAttributes);
+canvas.getContext("webgl2", contextAttributes);
 ```
 
-Canvas 뒤의 HTML이나 다른 레이어가 보여야 한다면 `true`를 사용합니다. 전체 화면 게임, 이미지 처리 결과, 불투명한 시각화처럼 배경이 비칠 필요가 없다면 `false`를 사용할 수 있습니다. Canvas가 항상 불투명하다는 사실을 브라우저가 알 수 있어 합성 비용을 줄이는 데 도움이 될 수 있습니다.
+##### 전체 옵션 한눈에 보기
 
-Canvas 2D와 `bitmaprenderer`도 `alpha`를 사용할 수 있습니다. WebGPU에서는 `alpha` 대신 `context.configure()`의 `alphaMode`를 설정합니다.
+| 옵션 | 기본값 | 결정하는 것 | 설정을 바꿀 만한 경우 |
+| --- | --- | --- | --- |
+| `alpha` | `true` | Canvas 배경 투명도 | Canvas가 항상 불투명할 때 `false` |
+| `premultipliedAlpha` | `true` | RGB와 알파의 합성 방식 | 직선 알파 방식이 꼭 필요할 때 `false` |
+| `antialias` | `true` | 도형 경계선 보정 | 전체 화면 효과나 픽셀 아트에서 `false` |
+| `depth` | `true` | 3D 물체의 앞뒤 판별 | 깊이 비교가 필요 없을 때 `false` |
+| `stencil` | `false` | 영역 마스크 버퍼 | 포털, 거울, 복잡한 마스크가 필요할 때 `true` |
+| `preserveDrawingBuffer` | `false` | 표시 후 프레임 보존 | 나중에 프레임을 다시 읽어야 할 때 `true` 검토 |
+| `powerPreference` | `"default"` | 선호하는 GPU 성능 성향 | 고성능 또는 저전력 GPU를 선호할 때 변경 |
+| `failIfMajorPerformanceCaveat` | `false` | 저성능 환경에서 생성 실패 여부 | 느린 GPU에서는 실행하지 않을 때 `true` |
+| `desynchronized` | `false` | 입력부터 출력까지의 지연 감소 | 필기처럼 낮은 지연이 중요할 때 `true` |
+| `xrCompatible` | `false` | WebXR 호환 GPU 요청 | VR·AR 세션을 사용할 때 고려 |
 
-##### `antialias: false`
+##### 어떤 컨텍스트에서 사용할 수 있는가?
 
-WebGL 도형의 경계선을 부드럽게 만드는 기본 멀티샘플링을 사용하지 않겠다는 뜻입니다. 일반적인 3D 삼각형의 가장자리는 계단처럼 보일 수 있습니다.
+위 10개를 한꺼번에 `getContext()`의 두 번째 인자로 받는 대상은 WebGL과 WebGL 2입니다.
 
-일반적인 3D 모델의 윤곽을 부드럽게 보여야 한다면 `true`가 유용합니다. 화면 전체를 덮는 후처리 효과, 픽셀 아트, 경계가 화면 밖에 있는 전체 화면 셰이더처럼 기본 도형 경계 보정이 중요하지 않다면 `false`를 고려할 수 있습니다.
+| 범위 | 설명 |
+| --- | --- |
+| WebGL·WebGL 2 | 10개 옵션 모두 사용 가능 |
+| Canvas 2D | `alpha`, `desynchronized` 등 일부만 사용 |
+| `bitmaprenderer` | `alpha` 사용 가능 |
+| WebGPU | `getContext()` 옵션으로 사용하지 않고 `configure()`, 렌더 파이프라인, `requestAdapter()`에서 따로 설정 |
 
-`antialias: false`라고 해서 셰이더 내부의 색상 변화가 무조건 거칠어지는 것은 아닙니다. 이 옵션은 주로 WebGL 도형의 가장자리에 적용되며 Canvas 해상도와는 별개의 문제입니다.
+같은 개념이 다른 API에도 존재할 수 있지만 이름이나 설정 위치는 다를 수 있습니다.
 
-Canvas 2D는 이 값을 `getContext()` 옵션으로 받지 않습니다. `ctx.imageSmoothingEnabled`는 이미지 확대·축소 보정 기능이므로 이 옵션과 목적이 다릅니다. WebGPU에서는 렌더 파이프라인의 `multisample.count`로 멀티샘플링을 구성합니다.
+##### 투명도와 색상 합성
 
-##### `depth: false`
+**1. `alpha`**
 
-어떤 물체가 앞에 있고 뒤에 있는지 기록하는 깊이 버퍼를 만들지 않겠다는 뜻입니다.
+Canvas가 투명한 배경을 가질 수 있는지 결정합니다.
 
-여러 3D 물체가 앞뒤로 겹치는 장면이라면 일반적으로 `true`가 필요합니다. 2D 렌더링, 전체 화면 후처리, 사각형 하나만 그리는 셰이더처럼 물체의 앞뒤를 비교하지 않는다면 `false`로 메모리를 절약할 수 있습니다.
+```text
+true  : Canvas 뒤의 HTML이나 다른 레이어가 보일 수 있음
+false : Canvas가 항상 불투명함
+```
 
-Canvas 2D에는 깊이 버퍼가 없습니다. WebGPU에서는 `getContext()`가 아니라 깊이 텍스처와 렌더 파이프라인의 `depthStencil` 항목을 구성합니다.
+- 오버레이, 투명한 3D 뷰어: `true`
+- 전체 화면 게임, 불투명한 시각화: `false` 고려
 
-##### `stencil: false`
+Canvas 2D와 `bitmaprenderer`도 `alpha`를 사용할 수 있습니다. WebGPU에서는 `context.configure()`의 `alphaMode`를 사용합니다.
 
-특정 영역에만 그림을 그리기 위한 스텐실 버퍼를 만들지 않겠다는 뜻입니다.
+**2. `premultipliedAlpha`**
 
-스텐실 버퍼는 다음과 같은 마스크 효과에 사용됩니다.
+브라우저가 WebGL의 RGB 색상이 알파값과 미리 곱해져 있다고 가정할지 결정합니다.
+
+```text
+원래 빨강: 1.0
+알파값:    0.5
+미리 곱한 빨강: 1.0 × 0.5 = 0.5
+```
+
+- 일반적인 투명 WebGL Canvas: 기본값 `true` 유지
+- 셰이더가 직선 알파 방식의 RGB를 출력하고 그 방식으로 합성해야 하는 경우: `false` 검토
+- `alpha: false`인 불투명 Canvas: 영향이 거의 없음
+
+알파 합성 방식을 정확히 이해하지 못한 상태라면 기본값을 유지하는 편이 안전합니다.
+
+##### 도형과 3D 버퍼
+
+**3. `antialias`**
+
+WebGL 도형의 경계선을 부드럽게 처리할지 요청합니다.
+
+- 3D 모델의 윤곽을 부드럽게 표시: `true`
+- 전체 화면 후처리, 픽셀 아트, 성능 우선: `false` 고려
+
+이 옵션은 주로 도형의 가장자리에 적용됩니다. Canvas 해상도나 셰이더 내부의 색상 변화와는 별개입니다.
+
+Canvas 2D의 `imageSmoothingEnabled`는 이미지 확대·축소 보정이므로 목적이 다릅니다. WebGPU에서는 렌더 파이프라인의 `multisample.count`를 설정합니다.
+
+**4. `depth`**
+
+각 픽셀에서 어떤 3D 물체가 더 가까운지 기록하는 깊이 버퍼를 요청합니다.
+
+- 여러 3D 물체가 앞뒤로 겹치는 장면: `true`
+- 2D 렌더링, 전체 화면 효과, 깊이 비교가 없는 장면: `false`
+
+Canvas 2D에는 깊이 버퍼가 없습니다. WebGPU에서는 깊이 텍스처와 렌더 파이프라인의 `depthStencil`을 구성합니다.
+
+**5. `stencil`**
+
+화면의 특정 영역에만 그리기 위한 스텐실 버퍼를 요청합니다.
+
+사용 사례:
 
 - 거울과 포털
 - 특정 영역 잘라내기
 - 복잡한 마스크
 - 윤곽선 효과
 
-이런 영역 마스킹이 필요하면 `true`를 사용하고, 사용하지 않는다면 `false`로 스텐실 버퍼 생성을 생략할 수 있습니다.
+스텐실 마스크가 필요하면 `true`, 사용하지 않으면 `false`가 적합합니다. Canvas 2D에서는 `clip()`으로 2D 영역을 자를 수 있습니다. WebGPU에서는 스텐실을 포함하는 텍스처 형식과 `depthStencil`을 구성합니다.
 
-Canvas 2D에서는 `clip()`으로 2D 영역을 잘라낼 수 있습니다. WebGPU에서는 스텐실을 포함하는 텍스처 형식과 렌더 파이프라인의 `depthStencil` 항목을 구성합니다.
+##### 프레임 보존과 성능
 
-##### `preserveDrawingBuffer: false`
+**6. `preserveDrawingBuffer`**
 
-프레임을 화면에 표시한 후 그 내용을 계속 보존할 필요가 없다는 뜻입니다.
-
-```text
-1번 프레임을 그림
-→ 화면에 표시
-→ 이전 내용은 보존하지 않아도 됨
-
-2번 프레임을 새로 그림
-→ 화면에 표시
-```
-
-매 프레임 화면 전체를 다시 그리는 애니메이션과 게임이라면 일반적으로 `false`가 적합합니다. 브라우저가 이전 프레임 버퍼를 자유롭게 재사용하거나 폐기할 수 있어 성능에 유리합니다.
-
-`false`인 경우 프레임 표시가 끝난 후의 버퍼 내용은 보장되지 않습니다. `canvas.toDataURL()` 등으로 나중에 저장하거나 이전 프레임을 계속 이용해야 한다면 렌더링 직후 캡처하거나 `true`를 검토해야 합니다. `true`는 성능과 메모리 비용이 커질 수 있으므로 필요한 경우에만 사용합니다.
-
-Canvas 2D는 그린 내용이 기본적으로 남으므로 이 옵션이 없습니다. WebGPU에도 동일한 옵션이 없으며, 보존할 결과를 별도의 텍스처나 버퍼로 복사해야 합니다.
-
-##### `powerPreference: "high-performance"`
-
-가능하면 고성능 GPU를 사용해 달라는 힌트입니다.
+프레임을 화면에 표시한 뒤 드로잉 버퍼의 내용을 계속 보존할지 결정합니다.
 
 ```text
-"default"          브라우저와 운영체제의 기본 선택
-"low-power"        전력 소비가 낮은 GPU 선호
-"high-performance" 성능이 높은 GPU 선호
+false : 표시가 끝난 버퍼를 브라우저가 재사용하거나 폐기할 수 있음
+true  : 직접 지우거나 덮어쓸 때까지 내용을 보존
 ```
 
-복잡한 3D 게임, 고해상도 시각화, 연산량이 많은 셰이더에는 `"high-performance"`를 고려할 수 있습니다. 간단한 그래픽이나 배터리 사용 시간이 더 중요하다면 `"low-power"`가 적합할 수 있습니다.
+- 매 프레임 전체를 다시 그리는 애니메이션과 게임: `false`
+- 표시가 끝난 뒤 프레임을 읽거나 이전 내용을 계속 사용해야 하는 경우: `true` 검토
 
-다만 반드시 특정 GPU가 선택된다는 보장은 없습니다. 최종 선택은 브라우저, 운영체제, 그래픽 드라이버가 결정합니다. WebGPU에서는 `getContext()`가 아니라 `navigator.gpu.requestAdapter()`에 같은 이름의 옵션을 전달합니다.
+`true`는 성능과 메모리 비용이 커질 수 있습니다. 스크린샷은 가능하면 렌더링 직후 `toDataURL()` 또는 `readPixels()`를 호출하고 기본값을 유지하는 편이 좋습니다.
 
-##### 한눈에 정리
+Canvas 2D는 그린 내용이 기본적으로 남으므로 이 옵션이 없습니다. WebGPU에서는 보존할 결과를 별도 텍스처나 버퍼로 복사합니다.
 
-| 옵션 | `true` 또는 고성능 설정을 고려할 때 | `false` 또는 저전력 설정을 고려할 때 |
-| --- | --- | --- |
-| `alpha` | Canvas 뒤의 HTML이 보여야 할 때 | 완전히 불투명한 화면일 때 |
-| `antialias` | 3D 도형 윤곽을 부드럽게 보여야 할 때 | 전체 화면 효과, 픽셀 아트, 성능이 중요할 때 |
-| `depth` | 여러 3D 물체의 앞뒤를 판별할 때 | 2D 또는 전체 화면 효과만 그릴 때 |
-| `stencil` | 포털, 거울, 복잡한 마스크가 필요할 때 | 영역 마스킹을 사용하지 않을 때 |
-| `preserveDrawingBuffer` | 표시 후에도 프레임 버퍼가 필요할 때 | 매 프레임 전체를 다시 그릴 때 |
-| `powerPreference` | 복잡한 그래픽에는 `"high-performance"` | 배터리가 중요하면 `"low-power"` |
+**7. `powerPreference`**
 
-필요하지 않은 버퍼와 기능은 끄는 것이 메모리와 성능에 유리할 수 있습니다. 반대로 필요한 기능까지 끄면 올바른 화면을 만들 수 없으므로 렌더링 방식에 맞춰 선택해야 합니다.
+어떤 성능 성향의 GPU를 선호하는지 브라우저에 전달합니다.
 
-컨텍스트 속성은 생성 시점에 정해지므로 같은 컨텍스트에서 나중에 변경할 수 없습니다. 브라우저가 실제로 적용한 값은 다음처럼 확인할 수 있습니다.
+```text
+"default"          브라우저와 운영체제가 결정
+"high-performance" 렌더링 성능 우선
+"low-power"        전력 절약 우선
+```
+
+- 복잡한 3D, 고해상도 시각화, 무거운 셰이더: `"high-performance"` 고려
+- 간단한 그래픽, 배터리 사용 시간 우선: `"low-power"` 고려
+
+이 값은 힌트일 뿐이며 특정 GPU 선택을 보장하지 않습니다. WebGPU에서는 `navigator.gpu.requestAdapter()`에 같은 이름의 옵션을 전달합니다.
+
+**8. `failIfMajorPerformanceCaveat`**
+
+하드웨어 GPU를 제대로 사용할 수 없거나 성능 문제가 클 때 WebGL 컨텍스트 생성을 실패시킬지 결정합니다.
+
+```text
+false : 성능이 낮아도 가능한 컨텍스트를 생성
+true  : 심각한 성능 문제가 예상되면 null 반환
+```
+
+- 가능한 많은 환경에서 실행해야 하는 일반 콘텐츠: `false`
+- 충분한 GPU 성능이 없으면 실행할 의미가 없는 고성능 콘텐츠: `true` 고려
 
 ```js
-console.log(gl.getContextAttributes());
+const gl = canvas.getContext("webgl", {
+  failIfMajorPerformanceCaveat: true,
+});
+
+if (!gl) {
+  // 2D 화면이나 정적 이미지 같은 대체 콘텐츠 표시
+}
 ```
+
+`true`를 사용한다면 WebGL을 생성하지 못한 환경을 위한 대체 화면이 필요합니다.
+
+**9. `desynchronized`**
+
+Canvas의 그리기 주기와 브라우저의 일반적인 화면 표시 주기를 덜 동기화하여 지연을 줄여달라는 힌트입니다.
+
+- 빠른 필기와 드로잉 애플리케이션
+- 입력 반응이 중요한 실시간 인터랙션
+- 화질 안정성보다 낮은 지연이 중요한 화면
+
+일반적인 애니메이션에서는 기본값 `false`를 유지하면 됩니다. `true` 요청은 환경에 따라 무시될 수 있습니다.
+
+Canvas 2D에서도 같은 옵션을 사용할 수 있습니다.
+
+##### VR·AR
+
+**10. `xrCompatible`**
+
+VR·AR 장치와 호환되는 GPU 설정을 요청합니다.
+
+- 일반적인 WebGL 콘텐츠: `false`
+- WebXR VR·AR 콘텐츠: 필요할 때 XR 호환 설정
+
+컨텍스트 생성 단계에서 `xrCompatible: true`를 지정할 수 있지만, 실제 XR 세션을 시작할 때 비동기 메서드를 사용하는 방식이 권장됩니다.
+
+```js
+await gl.makeXRCompatible();
+```
+
+##### 요청값과 실제 적용값
+
+컨텍스트 옵션은 생성 시점에 정해지므로 같은 컨텍스트에서 나중에 변경할 수 없습니다.
+
+특히 `depth`, `stencil`, `antialias`를 `true`로 지정하는 것은 요청입니다. 브라우저나 GPU가 그대로 제공하지 못할 수 있습니다. 반대로 `false`로 요청하면 해당 버퍼나 기능을 제공하지 않아야 합니다.
+
+실제로 적용된 값은 `getContextAttributes()`로 확인합니다.
+
+```js
+const actualOptions = gl.getContextAttributes();
+console.log(actualOptions);
+```
+
+관련 자료:
+
+- [MDN: `HTMLCanvasElement.getContext()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext)
+- [Khronos: WebGL Specification](https://registry.khronos.org/webgl/specs/latest/1.0/)
 
 ### 예시
 다음 ``<canvas>`` 엘리먼트를 고려해볼 때
