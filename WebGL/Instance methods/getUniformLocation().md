@@ -1,6 +1,40 @@
 # WebGLRenderingContext: getUniformLocation()
 
-`getUniformLocation()`은 `WebGLProgram` 안에 선언된 **uniform 변수의 위치를 가져오는 메서드**입니다.
+WebGL API의 WebGLRenderingContext.getUniformLocation() 메서드는 특정 WebGLProgram 안에 선언된 uniform 변수의 위치(location) 를 가져옵니다.
+
+반환되는 값은 WebGLUniformLocation 객체입니다.
+
+쉽게 말하면 JavaScript에서 Shader의 uniform 값을 변경하려면 먼저:
+
+Shader 안의 uniform 이름
+↓
+getUniformLocation()
+↓
+uniform 위치 찾기
+↓
+uniform1f(), uniform2fv(), uniformMatrix4fv() 등
+↓
+실제 값 전달
+
+과정을 거쳐야 합니다.
+
+예를 들어 Fragment Shader에:
+
+uniform vec4 uColor;
+
+가 있다면 JavaScript에서는:
+
+const uColor = gl.getUniformLocation(
+    program,
+    "uColor"
+);
+
+gl.uniform4fv(
+    uColor,
+    [1.0, 0.0, 0.0, 1.0]
+);
+
+처럼 사용할 수 있습니다.
 
 ```javascript
 getUniformLocation(program, name)
